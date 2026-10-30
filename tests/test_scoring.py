@@ -190,3 +190,34 @@ def test_reasons_are_human_readable() -> None:
         "Prize $20,000",
         "Location preference: Online",
     ]
+
+
+# --- unknowns surfacing --------------------------------------------------------
+
+
+def test_unknowns_flag_missing_data_and_feed_blind_spots() -> None:
+    ranked = score(make_event(), InterestProfile(interests=[{"keyword": "ai"}]), now=NOW)
+    assert "Deadline unknown" in ranked.unknowns
+    assert "Prize not listed" in ranked.unknowns
+    assert "Location/format unknown" in ranked.unknowns
+    assert "Entry fee unknown (feeds list no cost data)" in ranked.unknowns
+    assert "Eligibility restrictions unknown (not documented in feeds)" in ranked.unknowns
+
+
+def test_unknowns_omit_fields_the_feed_documents() -> None:
+    ranked = score(
+        make_event(
+            deadline=days_out(3),
+            prize_amount="$20,000",
+            location="Online",
+        ),
+        InterestProfile(interests=[{"keyword": "ai"}]),
+        now=NOW,
+    )
+    assert "Deadline unknown" not in ranked.unknowns
+    assert "Prize not listed" not in ranked.unknowns
+    assert "Location/format unknown" not in ranked.unknowns
+    # Cost and eligibility are never documented by these feeds, so they are
+    # always flagged rather than assumed.
+    assert any("Entry fee unknown" in note for note in ranked.unknowns)
+    assert any("Eligibility" in note for note in ranked.unknowns)

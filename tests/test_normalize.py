@@ -35,7 +35,10 @@ def test_normalize_name_ignores_case_and_punctuation() -> None:
 def test_dedupe_merges_same_url_different_names() -> None:
     a = make_event(name="Event A", url="https://same.example.com")
     b = make_event(name="Event B", source="hackclub", url="https://www.same.example.com/")
-    assert dedupe([a, b]) == [a]
+    merged = dedupe([a, b])
+    assert len(merged) == 1
+    assert merged[0].name == "Event A"  # first seen wins on ties
+    assert merged[0].sources == ["devpost", "hackclub"]
 
 
 def test_dedupe_merges_same_name_with_overlapping_dates() -> None:
@@ -49,7 +52,85 @@ def test_dedupe_merges_same_name_with_overlapping_dates() -> None:
         starts_at=july(5),
         ends_at=july(15),
     )
-    assert dedupe([a, b]) == [a]
+    merged = dedupe([a, b])
+    assert len(merged) == 1
+    assert merged[0].name == "Summer Hack"
+    assert merged[0].sources == ["devpost", "hackclub"]
+
+
+def test_dedupe_records_conflicting_field_values_with_attribution() -> None:
+    a = make_event(
+        name="Prize Clash",
+        url="https://a.example.com",
+        prize_amount="$1,000",
+        starts_at=july(1),
+        ends_at=july(10),
+    )
+    b = make_event(
+        name="Prize Clash",
+        source="hackclub",
+        url="https://b.example.com",
+        prize_amount="$5,000",
+        starts_at=july(2),
+        ends_at=july(12),
+    )
+    merged = dedupe([a, b])[0]
+    assert merged.conflicts == {
+        "prize_amount": ["devpost: $1,000", "hackclub: $5,000"]
+    }
+
+
+def test_dedupe_conflicting_deadlines_recorded_as_iso() -> None:
+    a = make_event(
+        name="Date Clash",
+        url="https://a.example.com",
+        deadline=july(10),
+        starts_at=july(1),
+        ends_at=july(15),
+    )
+    b = make_event(
+        name="Date Clash",
+        source="hackclub",
+        url="https://b.example.com",
+        deadline=july(12),
+        starts_at=july(2),
+        ends_at=july(12),
+    )
+    merged = dedupe([a, b])[0]
+    assert merged.conflicts["deadline"] == [
+        "devpost: 2026-07-10T00:00:00+00:00",
+        "hackclub: 2026-07-12T00:00:00+00:00",
+    ]
+
+
+def test_dedupe_does_not_flag_agreeing_or_onesided_values() -> None:
+    a = make_event(
+        name="Agree",
+        url="https://a.example.com",
+        prize_amount="$1,000",
+        location="Online",
+        starts_at=july(1),
+        ends_at=july(10),
+    )
+    b = make_event(
+        name="Agree",
+        source="hackclub",
+        url="https://b.example.com",
+        prize_amount="$1,000",
+        starts_at=july(2),
+        ends_at=july(12),
+    )
+    merged = dedupe([a, b])[0]
+    assert merged.conflicts == {}
+
+
+def test_dedupe_three_way_merge_keeps_all_attribution() -> None:
+    a = make_event(name="Trio", url="https://a.example.com")
+    b = make_event(name="Trio", source="hackclub", url="https://b.example.com")
+    c = make_event(name="TRIO!!", url="https://c.example.com")
+    merged = dedupe([a, b, c])
+    assert len(merged) == 1
+    assert merged[0].sources == ["devpost", "hackclub"]
 
 
 def test_dedupe_keeps_same_name_without_date_overlap() -> None:
@@ -85,7 +166,12 @@ def test_dedupe_keeps_more_complete_event() -> None:
         starts_at=july(1),
         ends_at=july(10),
     )
-    assert dedupe([bare, rich]) == [rich]
+    merged = dedupe([bare, rich])
+    assert len(merged) == 1
+    # The richer record survives, now carrying the dropped source's attribution.
+    assert merged[0].name == "rich hack"
+    assert merged[0].prize_amount == "$1,000"
+    assert merged[0].sources == ["hackclub", "devpost"]
 
 
 def test_dedupe_preserves_first_seen_order() -> None:
