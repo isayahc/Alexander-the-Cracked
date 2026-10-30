@@ -1,5 +1,4 @@
 import pytest
-
 from payflow import Tier, best_tier, categorize, estimate_fee
 
 
