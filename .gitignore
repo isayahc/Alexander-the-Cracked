@@ -19,7 +19,9 @@ venv/
 .cache/
 
 # `alexander run` build output
-builds/
+builds/*
+# Reviewed build output (PayPal AI Hackathon submission) is versioned deliberately.
+!builds/paypal-ai-hackathon/
 
 # Environment / secrets
 .env
