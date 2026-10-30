@@ -2,6 +2,8 @@
 
 import click
 
+from alexander.discovery import discover_events
+
 
 @click.group()
 def cli() -> None:
@@ -9,6 +11,10 @@ def cli() -> None:
 
 
 @cli.command()
-def discover() -> None:
+@click.option("--no-cache", is_flag=True, default=False, help="Bypass the on-disk response cache.")
+def discover(no_cache: bool) -> None:
     """Search public feeds for hackathons and competitions."""
-    click.echo("not implemented yet")
+    events = discover_events(use_cache=not no_cache)
+    click.echo(f"Found {len(events)} events:")
+    for event in events:
+        click.echo(f"- {event.name} [{event.source}] {event.url}")

@@ -1,0 +1,379 @@
+{
+  "hackathons": [
+    {
+      "id": 31302,
+      "title": "PayPal AI Hackathon",
+      "displayed_location": {
+        "icon": "globe",
+        "location": "Online"
+      },
+      "open_state": "open",
+      "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/288/985/datas/medium_square.png",
+      "analytics_identifier": "PayPal AI Hackathon (31302)",
+      "url": "https://paypalaihackathon.devpost.com/",
+      "time_left_to_submission": "13 days left",
+      "submission_period_dates": "Oct 01 - Nov 12, 2026",
+      "themes": [
+        {
+          "id": 17,
+          "name": "Low/No Code"
+        },
+        {
+          "id": 6,
+          "name": "Machine Learning/AI"
+        },
+        {
+          "id": 25,
+          "name": "Web"
+        }
+      ],
+      "prize_amount": "$<span data-currency-value>67,500</span>",
+      "prizes_counts": {
+        "cash": 14,
+        "other": 3
+      },
+      "registrations_count": 24725,
+      "featured": false,
+      "organization_name": "PayPal",
+      "winners_announced": false,
+      "submission_gallery_url": "https://paypalaihackathon.devpost.com/project-gallery",
+      "start_a_submission_url": "https://paypalaihackathon.devpost.com/challenges/start_a_submission",
+      "invite_only": false,
+      "eligibility_requirement_invite_only_description": null,
+      "managed_by_devpost_badge": true
+    },
+    {
+      "id": 31024,
+      "title": "Meta VR Start Developer Competition 2026",
+      "displayed_location": {
+        "icon": "globe",
+        "location": "Online"
+      },
+      "open_state": "open",
+      "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/374/843/datas/medium_square.png",
+      "analytics_identifier": "Meta VR Start Developer Competition 2026 (31024)",
+      "url": "https://start-developer-competition-26.devpost.com/",
+      "time_left_to_submission": "19 days left",
+      "submission_period_dates": "Sep 24 - Nov 18, 2026",
+      "themes": [
+        {
+          "id": 5,
+          "name": "AR/VR"
+        },
+        {
+          "id": 6,
+          "name": "Machine Learning/AI"
+        },
+        {
+          "id": 25,
+          "name": "Web"
+        }
+      ],
+      "prize_amount": "$<span data-currency-value>1,000,000</span>",
+      "prizes_counts": {
+        "cash": 19,
+        "other": 0
+      },
+      "registrations_count": 4590,
+      "featured": true,
+      "organization_name": "Meta",
+      "winners_announced": false,
+      "submission_gallery_url": "https://start-developer-competition-26.devpost.com/project-gallery",
+      "start_a_submission_url": "https://start-developer-competition-26.devpost.com/challenges/start_a_submission",
+      "invite_only": false,
+      "eligibility_requirement_invite_only_description": null,
+      "managed_by_devpost_badge": true
+    },
+    {
+      "id": 31667,
+      "title": "Kiroween 2026",
+      "displayed_location": {
+        "icon": "globe",
+        "location": "Online"
+      },
+      "open_state": "open",
+      "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/585/149/datas/medium_square.png",
+      "analytics_identifier": "Kiroween 2026 (31667)",
+      "url": "https://kiroween.devpost.com/",
+      "time_left_to_submission": "about 1 month left",
+      "submission_period_dates": "Oct 30 - Dec 04, 2026",
+      "themes": [
+        {
+          "id": 23,
+          "name": "Beginner Friendly"
+        },
+        {
+          "id": 6,
+          "name": "Machine Learning/AI"
+        },
+        {
+          "id": 22,
+          "name": "Open Ended"
+        }
+      ],
+      "prize_amount": "$<span data-currency-value>100,000</span>",
+      "prizes_counts": {
+        "cash": 15,
+        "other": 2
+      },
+      "registrations_count": 2447,
+      "featured": true,
+      "organization_name": "Kiro",
+      "winners_announced": false,
+      "submission_gallery_url": "https://kiroween.devpost.com/project-gallery",
+      "start_a_submission_url": "https://kiroween.devpost.com/challenges/start_a_submission",
+      "invite_only": false,
+      "eligibility_requirement_invite_only_description": null,
+      "managed_by_devpost_badge": true
+    },
+    {
+      "id": 31054,
+      "title": "Qloo Agentic Hackathon",
+      "displayed_location": {
+        "icon": "globe",
+        "location": "Online"
+      },
+      "open_state": "open",
+      "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/363/782/datas/medium_square.png",
+      "analytics_identifier": "Qloo Agentic Hackathon (31054)",
+      "url": "https://qloo.devpost.com/",
+      "time_left_to_submission": "about 11 hours left",
+      "submission_period_dates": "Sep 30 - Oct 30, 2026",
+      "themes": [
+        {
+          "id": 6,
+          "name": "Machine Learning/AI"
+        }
+      ],
+      "prize_amount": "$<span data-currency-value>25,000</span>",
+      "prizes_counts": {
+        "cash": 3,
+        "other": 0
+      },
+      "registrations_count": 2923,
+      "featured": false,
+      "organization_name": "Qloo",
+      "winners_announced": false,
+      "submission_gallery_url": "https://qloo.devpost.com/project-gallery",
+      "start_a_submission_url": "https://qloo.devpost.com/challenges/start_a_submission",
+      "invite_only": false,
+      "eligibility_requirement_invite_only_description": null,
+      "managed_by_devpost_badge": false
+    },
+    {
+      "id": 31742,
+      "title": "Codex x TwitchCon Hackathon",
+      "displayed_location": {
+        "icon": "globe",
+        "location": "Online"
+      },
+      "open_state": "open",
+      "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/656/411/datas/medium_square.png",
+      "analytics_identifier": "Codex x TwitchCon Hackathon (31742)",
+      "url": "https://twitchcon-codex.devpost.com/",
+      "time_left_to_submission": "3 days left",
+      "submission_period_dates": "Oct 23 - Nov 02, 2026",
+      "themes": [
+        {
+          "id": 10,
+          "name": "Communication"
+        },
+        {
+          "id": 4,
+          "name": "Gaming"
+        },
+        {
+          "id": 6,
+          "name": "Machine Learning/AI"
+        }
+      ],
+      "prize_amount": "$<span data-currency-value>25,000</span>",
+      "prizes_counts": {
+        "cash": 4,
+        "other": 0
+      },
+      "registrations_count": 1742,
+      "featured": true,
+      "organization_name": "Twitch",
+      "winners_announced": false,
+      "submission_gallery_url": "https://twitchcon-codex.devpost.com/project-gallery",
+      "start_a_submission_url": "https://twitchcon-codex.devpost.com/challenges/start_a_submission",
+      "invite_only": false,
+      "eligibility_requirement_invite_only_description": null,
+      "managed_by_devpost_badge": true
+    },
+    {
+      "id": 31400,
+      "title": "YouCam API Skin AI & eCommerce VTO Hackathon",
+      "displayed_location": {
+        "icon": "globe",
+        "location": "Online"
+      },
+      "open_state": "open",
+      "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/375/196/datas/medium_square.png",
+      "analytics_identifier": "YouCam API Skin AI & eCommerce VTO Hackathon (31400)",
+      "url": "https://youcam-api-skin-ai-ecommerce.devpost.com/",
+      "time_left_to_submission": "3 days left",
+      "submission_period_dates": "Sep 29 - Nov 02, 2026",
+      "themes": [
+        {
+          "id": 5,
+          "name": "AR/VR"
+        },
+        {
+          "id": 20,
+          "name": "E-commerce/Retail"
+        },
+        {
+          "id": 6,
+          "name": "Machine Learning/AI"
+        }
+      ],
+      "prize_amount": "$<span data-currency-value>6,000</span>",
+      "prizes_counts": {
+        "cash": 1,
+        "other": 0
+      },
+      "registrations_count": 1503,
+      "featured": true,
+      "organization_name": "Perfect Corp",
+      "winners_announced": false,
+      "submission_gallery_url": "https://youcam-api-skin-ai-ecommerce.devpost.com/project-gallery",
+      "start_a_submission_url": "https://youcam-api-skin-ai-ecommerce.devpost.com/challenges/start_a_submission",
+      "invite_only": false,
+      "eligibility_requirement_invite_only_description": null,
+      "managed_by_devpost_badge": false
+    },
+    {
+      "id": 31659,
+      "title": "Learn AR with SPECS",
+      "displayed_location": {
+        "icon": "globe",
+        "location": "Online"
+      },
+      "open_state": "open",
+      "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/541/121/datas/medium_square.png",
+      "analytics_identifier": "Learn AR with SPECS (31659)",
+      "url": "https://learn-specs.devpost.com/",
+      "time_left_to_submission": "10 days left",
+      "submission_period_dates": "Oct 15 - Nov 09, 2026",
+      "themes": [
+        {
+          "id": 5,
+          "name": "AR/VR"
+        },
+        {
+          "id": 6,
+          "name": "Machine Learning/AI"
+        },
+        {
+          "id": 18,
+          "name": "Design"
+        }
+      ],
+      "prize_amount": "$<span data-currency-value>2,500</span>",
+      "prizes_counts": {
+        "cash": 3,
+        "other": 0
+      },
+      "registrations_count": 981,
+      "featured": false,
+      "organization_name": "Devpost",
+      "winners_announced": false,
+      "submission_gallery_url": "https://learn-specs.devpost.com/project-gallery",
+      "start_a_submission_url": "https://learn-specs.devpost.com/challenges/start_a_submission",
+      "invite_only": false,
+      "eligibility_requirement_invite_only_description": null,
+      "managed_by_devpost_badge": true
+    },
+    {
+      "id": 31552,
+      "title": "UGREEN Hackathon 2026 on AI NAS",
+      "displayed_location": {
+        "icon": "globe",
+        "location": "Online"
+      },
+      "open_state": "open",
+      "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/624/690/datas/medium_square.png",
+      "analytics_identifier": "UGREEN Hackathon 2026 on AI NAS (31552)",
+      "url": "https://ugreenhackathon.devpost.com/",
+      "time_left_to_submission": "17 days left",
+      "submission_period_dates": "Oct 22 - Nov 16, 2026",
+      "themes": [
+        {
+          "id": 12,
+          "name": "Lifehacks"
+        },
+        {
+          "id": 6,
+          "name": "Machine Learning/AI"
+        },
+        {
+          "id": 11,
+          "name": "Productivity"
+        }
+      ],
+      "prize_amount": "$<span data-currency-value>46,000</span>",
+      "prizes_counts": {
+        "cash": 4,
+        "other": 0
+      },
+      "registrations_count": 859,
+      "featured": false,
+      "organization_name": "UGREEN",
+      "winners_announced": false,
+      "submission_gallery_url": "https://ugreenhackathon.devpost.com/project-gallery",
+      "start_a_submission_url": "https://ugreenhackathon.devpost.com/challenges/start_a_submission",
+      "invite_only": false,
+      "eligibility_requirement_invite_only_description": null,
+      "managed_by_devpost_badge": false
+    },
+    {
+      "id": 31572,
+      "title": "Codegeist 2026: Build with context. Ship with confidence.",
+      "displayed_location": {
+        "icon": "globe",
+        "location": "Online"
+      },
+      "open_state": "open",
+      "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/624/479/datas/medium_square.png",
+      "analytics_identifier": "Codegeist 2026: Build with context. Ship with confidence. (31572)",
+      "url": "https://codegeist2026.devpost.com/",
+      "time_left_to_submission": "about 2 months left",
+      "submission_period_dates": "Oct 27 - Dec 22, 2026",
+      "themes": [
+        {
+          "id": 6,
+          "name": "Machine Learning/AI"
+        },
+        {
+          "id": 21,
+          "name": "Enterprise"
+        },
+        {
+          "id": 11,
+          "name": "Productivity"
+        }
+      ],
+      "prize_amount": "$<span data-currency-value>120,000</span>",
+      "prizes_counts": {
+        "cash": 7,
+        "other": 1
+      },
+      "registrations_count": 800,
+      "featured": false,
+      "organization_name": "Atlassian",
+      "winners_announced": false,
+      "submission_gallery_url": "https://codegeist2026.devpost.com/project-gallery",
+      "start_a_submission_url": "https://codegeist2026.devpost.com/challenges/start_a_submission",
+      "invite_only": false,
+      "eligibility_requirement_invite_only_description": null,
+      "managed_by_devpost_badge": true
+    }
+  ],
+  "meta": {
+    "total_count": 14207,
+    "per_page": 9,
+    "fuzzy": false
+  }
+}

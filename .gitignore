@@ -15,6 +15,9 @@ venv/
 .ruff_cache/
 .mypy_cache/
 
+# Discovery response cache
+.cache/
+
 # Environment / secrets
 .env
 
