@@ -1,0 +1,35 @@
+{
+  "event_name": "PayPal AI Hackathon",
+  "out_dir": "evidence/live-run/build",
+  "best_known_dir": "evidence/live-run/build-best-known",
+  "best_iteration": 1,
+  "stop_reason": "pass_condition",
+  "iterations": [
+    {
+      "iteration": 1,
+      "passed": true,
+      "attempts_used": 0,
+      "duration_s": 1.760796709000033,
+      "test_summary": "tests passed: 9 passed in 0.06s",
+      "checks": [
+        {
+          "name": "tests",
+          "status": "passed",
+          "evidence": "tests passed: 9 passed in 0.06s"
+        },
+        {
+          "name": "spec",
+          "status": "passed",
+          "evidence": "SPEC.md present (1500 bytes)"
+        },
+        {
+          "name": "readme",
+          "status": "passed",
+          "evidence": "README.md present (901 bytes)"
+        }
+      ],
+      "error": null,
+      "restored_best": false
+    }
+  ]
+}

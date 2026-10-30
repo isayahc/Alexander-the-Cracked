@@ -1,0 +1,85 @@
+{
+  "run": {
+    "script": "evidence/live-run/run_live_iteration.py (+ make_brief.py for the brief and feed stamps)",
+    "started_utc": "2026-10-30T22:07:00Z",
+    "epic": "https://github.com/isayahc/Alexander-the-Cracked/issues/15",
+    "unit": "(d) end-to-end traceability run — permitted live leg",
+    "live_points": [
+      "Devpost and Hack Club discovery feeds fetched over the network (read-only public APIs)",
+      "built project written by the agent directly (real implementation + tests, not a fixture)",
+      "independent evaluation executed the real pytest subprocess against the built project"
+    ],
+    "builder_label": "direct agent execution — worker dispatch unavailable from this delegated context; verbatim platform responses in dispatch-blockers.md; attempts_used=0 because no worker was dispatched",
+    "real_components": [
+      "ResponseCache with live feed payloads",
+      "feed parsers + canonical dedupe",
+      "ranking (score + sort)",
+      "requirement ledger",
+      "brief planning (build_brief)",
+      "iteration loop with budgets",
+      "independent evaluation (run_tests subprocess)"
+    ]
+  },
+  "discovery": {
+    "feeds": {
+      "devpost": "https://devpost.com/api/hackathons",
+      "hackclub": "https://hackathons.hackclub.com/api/events/upcoming"
+    },
+    "canonical_events": 24,
+    "feed_fetch_stamps": "feed-provenance.json (fetched_at_utc + payload sha256 per feed)",
+    "console_record": "discover.log"
+  },
+  "ranking": {
+    "profile": "profile.yaml (repo root, documented defaults)",
+    "output": "rank.json (full ranked list with reasons and unknowns)",
+    "top_event": "PayPal AI Hackathon",
+    "top_score": 5.1948,
+    "top_reasons": [
+      "Matches interests: ai, web",
+      "Deadline in 12 day(s)",
+      "Prize $67,500",
+      "Location preference: Online"
+    ],
+    "surfaced_unknowns": [
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ]
+  },
+  "ledger": {
+    "confirmed_requirements": 4,
+    "unknown_requirements": 2,
+    "open_questions": 2,
+    "files": ["ledger.json", "ledger.md"]
+  },
+  "brief": "brief.json (derived by build_brief from the live top-ranked event)",
+  "build": {
+    "project": "payflow-fee-assistant (stdlib-only fee/tier/order-note CLI for the traced event)",
+    "backend": "direct agent execution (see builder_label)",
+    "dispatch_blockers": "dispatch-blockers.md + raw dispatch.log"
+  },
+  "iteration": {
+    "budgets": "1 iteration, 1 attempt, 20 minutes wall clock",
+    "stop_reason": "pass_condition",
+    "best_iteration": 1,
+    "independent_evaluation": {
+      "tests": "9 passed in 0.06s (real pytest subprocess, re-run by the loop)",
+      "spec_check": "passed",
+      "readme_check": "passed"
+    },
+    "manifest": "build-iterations.json",
+    "best_known_snapshot": "build-best-known/"
+  },
+  "labels": {
+    "verified_execution": [
+      "live feed discovery/ranking/ledger (read-only HTTP)",
+      "independent test evaluation of the built project",
+      "blocked-dispatch behavior of ObviousBackend in a delegated context"
+    ],
+    "not_claimed": [
+      "no competition entry was submitted",
+      "no PayPal/payment or Anthropic credentials were used or tested",
+      "the ObviousBackend worker-dispatch path itself was NOT exercised end-to-end — see dispatch-blockers.md",
+      "eligibility and judging criteria remain unresolved open questions; resolve against the official event page before any entry"
+    ]
+  }
+}
