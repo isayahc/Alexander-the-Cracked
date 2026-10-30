@@ -2,6 +2,7 @@
 
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -79,10 +80,23 @@ def _npm_test_command(out_dir: Path) -> list[str] | None:
     return None
 
 
+_PASS_SUMMARY_RE = re.compile(r"\b\d+ passed\b")
+
+
+def _pass_evidence(output: str) -> str:
+    # A passing run's last line can be plugin noise (e.g. a deprecation
+    # warning); anchor on pytest's own "N passed" summary instead.
+    for line in reversed(output.splitlines()):
+        if _PASS_SUMMARY_RE.search(line):
+            return line.strip()
+    last_line = output.rsplit("\n", 1)[-1] if output else ""
+    return last_line
+
+
 def _summarize(proc: subprocess.CompletedProcess[str]) -> str:
     output = "\n".join(filter(None, [proc.stdout.strip(), proc.stderr.strip()]))
     if proc.returncode == 0:
-        last_line = output.rsplit("\n", 1)[-1] if output else ""
-        return f"tests passed: {last_line}" if last_line else "tests passed"
+        summary = _pass_evidence(output)
+        return f"tests passed: {summary}" if summary else "tests passed"
     prefix = "..." if len(output) > _SUMMARY_CHARS else ""
     return f"tests failed:\n{prefix}{output[-_SUMMARY_CHARS:]}"
