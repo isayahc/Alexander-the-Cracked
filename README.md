@@ -118,6 +118,37 @@ event (or `--top N` / `--pick <index>`) → build each selection into
 `<out-root>/<event-slug>/`. A failing build reports the error and moves on to
 the next selection; the command exits 1 if any build failed.
 
+### `alexander swarm`
+
+```bash
+alexander swarm                          # 3 workers, one per top-ranked event
+alexander swarm --instances 5            # 5 concurrent workers
+alexander swarm --instances 3 --events 10  # 3 workers churn through the top 10 events
+alexander swarm --dry-run                # print the plan + registry state; build nothing
+alexander swarm --registry /path/swarm.db
+alexander swarm --out builds --backend claude --max-attempts 2 --minutes 15
+```
+
+Swarm mode builds several events **concurrently**: discovery and ranking run
+once (through the shared, atomically-written response cache — N instances
+cause exactly one feed fetch per URL per hour), the top M events are planned,
+and then that many asyncio workers pull events in rank order. Before building,
+each worker *claims* the event in a shared SQLite registry; if another
+instance already claimed it, the worker moves on. The command exits 1 if any
+build failed.
+
+### `alexander swarm-report`
+
+```bash
+alexander swarm-report                       # read the default registry
+alexander swarm-report --registry /path/swarm.db --out my-builds
+```
+
+Prints the swarm leaderboard (rank, event, worker, status, attempts, tests,
+build directory) and writes `<out-root>/swarm-report.json` with the full rows.
+It reads any registry — including one written by a crashed coordinator — and
+exits 1 if any recorded build failed, with pending claims listed as a warning.
+
 ### `alexander build`
 
 ```bash
@@ -156,6 +187,29 @@ result = asyncio.run(
 print(result.status, result.artifact_path, result.test_summary)
 ```
 
+## Claim registry
+
+The swarm's only shared state is a SQLite claim registry (stdlib `sqlite3`,
+WAL mode; default `~/.cache/alexander/swarm.db`, override with `--registry`).
+Every event gets one row keyed by its slug, and claiming is a single
+`INSERT OR IGNORE` — so even two processes racing on the same event cannot
+both win. The claim owner defaults to `hostname:pid`, making two terminals on
+one machine distinct claimants.
+
+| State | Meaning | Set by | Exits |
+| --- | --- | --- | --- |
+| *(absent)* | Unclaimed — any worker may take it | — | `claim()` wins |
+| `claimed` | Owned, build in flight | `claim()` | `record_result()` or `release()` |
+| `success` | Built, tests verified | `record_result()` | terminal |
+| `failed` | Budget exhausted or errored | `record_result()` | terminal |
+
+Results are recorded on the same row (owner-checked), which makes the registry
+the single source for `swarm-report`. If a worker dies between claiming and
+recording, the row stays `claimed`: `swarm-report` lists it as **pending**
+for a human decision rather than auto-reclaiming. Multiple coordinators can
+run at once without harm — claiming stays atomic, and the registry file is
+created on first use.
+
 ## Backends
 
 The build engine is pluggable; pick one with `ALEXANDER_BUILD_BACKEND`
@@ -182,10 +236,14 @@ Every build is bounded two ways, overridable per invocation:
   `budget_exhausted`.
 
 Each attempt is a real agent run, so a `run --top 3` with defaults can spawn
-up to 15 coding-agent tasks. For a first contact, keep it cheap:
+up to 15 coding-agent tasks. Swarm mode multiplies this further: worst-case
+spend is **events × max attempts** (with `--instances 3` that is 3 events × 5
+attempts = up to 15 tasks by default), so the default `--instances` stays
+modest (3). For a first contact, keep it cheap:
 
 ```bash
 alexander run --max-attempts 1 --minutes 10
+alexander swarm --instances 2 --max-attempts 1 --minutes 10
 ```
 
 and graduate to bigger budgets once the output quality is where you want it.

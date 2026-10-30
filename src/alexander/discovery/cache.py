@@ -6,6 +6,8 @@ is cached verbatim per URL key; parsing always happens on read.
 
 import hashlib
 import json
+import os
+import tempfile
 import time
 from pathlib import Path
 
@@ -44,6 +46,15 @@ class ResponseCache:
         try:
             self.cache_dir.mkdir(parents=True, exist_ok=True)
             entry = {"fetched_at": time.time(), "data": data}
-            self._path_for(key).write_text(json.dumps(entry))
+            # Atomic swap so concurrent processes sharing the cache dir never
+            # observe a half-written entry.
+            fd, tmp_path = tempfile.mkstemp(dir=self.cache_dir, suffix=".tmp")
+            try:
+                with os.fdopen(fd, "w") as tmp_file:
+                    tmp_file.write(json.dumps(entry))
+                os.replace(tmp_path, self._path_for(key))
+            except BaseException:
+                Path(tmp_path).unlink(missing_ok=True)
+                raise
         except OSError:
             return
