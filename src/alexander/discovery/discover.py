@@ -21,12 +21,22 @@ def _fetch_cached_source(
     parse: Callable[[object], list[HackathonEvent]],
     cache: ResponseCache | None,
 ) -> list[HackathonEvent]:
-    """Fetch one feed through the cache when available and parse it."""
-    payload = cache.load(url) if cache is not None else None
+    """Fetch one feed through the cache when available and parse it.
+
+    On a miss, the fetch happens under a per-key interprocess lock with a
+    re-check, so N concurrent processes sharing the cache cause exactly one
+    HTTP fetch per URL; the rest pick up the fresh entry.
+    """
+    if cache is None:
+        return parse(http_get_json(url))
+    payload = cache.load(url)
     if payload is None:
-        payload = http_get_json(url)
-        if cache is not None:
-            cache.save(url, payload)
+        with cache.locked(url):
+            # Re-check: another process may have fetched while we waited.
+            payload = cache.load(url)
+            if payload is None:
+                payload = http_get_json(url)
+                cache.save(url, payload)
     return parse(payload)
 
 

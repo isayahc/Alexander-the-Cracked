@@ -6,10 +6,18 @@ is cached verbatim per URL key; parsing always happens on read.
 
 import hashlib
 import json
+import math
 import os
 import tempfile
 import time
+from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path
+
+try:
+    import fcntl
+except ImportError:  # pragma: no cover - non-POSIX; degrade to unlocked fetch
+    fcntl = None  # type: ignore[assignment]
 
 DEFAULT_TTL_SECONDS = 3600
 DEFAULT_CACHE_DIR = Path.home() / ".cache" / "alexander"
@@ -30,13 +38,46 @@ class ResponseCache:
         digest = hashlib.sha256(key.encode()).hexdigest()
         return self.cache_dir / f"{digest}.json"
 
+    @contextmanager
+    def locked(self, key: str) -> Iterator[None]:
+        """Hold the per-key interprocess advisory lock for the duration.
+
+        Backed by fcntl.flock on a lock file next to the entry, so separate
+        processes (not just threads) serialize. Where fcntl is unavailable,
+        degrade to unlocked: the cache stays correct, fetches may duplicate.
+        """
+        if fcntl is None:  # pragma: no cover - non-POSIX only
+            yield
+            return
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+        lock_path = self._path_for(key).with_suffix(".lock")
+        with open(lock_path, "w") as lock_file:
+            fcntl.flock(lock_file, fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(lock_file, fcntl.LOCK_UN)
+
     def load(self, key: str) -> object | None:
-        """Return the cached payload for ``key``, or None if missing/expired/corrupt."""
+        """Return the cached payload for ``key``, or None if missing/expired/corrupt.
+
+        The on-disk entry is untrusted shared state: any payload that does not
+        parse into a well-shaped entry is treated as a miss, never an error.
+        """
         try:
             entry = json.loads(self._path_for(key).read_text())
-        except (OSError, json.JSONDecodeError, ValueError):
+        except (OSError, ValueError):
+            # JSONDecodeError is a ValueError; OSError covers unreadable files.
+            return None
+        if not isinstance(entry, dict):
             return None
         fetched_at = entry.get("fetched_at", 0)
+        if isinstance(fetched_at, bool) or not isinstance(fetched_at, (int, float)):
+            return None
+        # NaN survives json.loads and makes every comparison false, which would
+        # serve stale data forever; reject non-finite stamps outright.
+        if not math.isfinite(fetched_at):
+            return None
         if time.time() - fetched_at > self.ttl_seconds:
             return None
         return entry.get("data")
