@@ -13,7 +13,7 @@ Design notes (also surfaced in the README):
 """
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 
 from alexander.discovery.models import HackathonEvent
@@ -114,11 +114,17 @@ def location_fraction(event: HackathonEvent, profile: InterestProfile) -> float:
 
 @dataclass(frozen=True)
 class RankedEvent:
-    """A scored event plus the reasons behind its ranking decision."""
+    """A scored event plus the reasons behind its ranking decision.
+
+    ``unknowns`` lists what the discovery feeds could not document for this
+    event (cost, eligibility, missing fields) — recorded alongside the score
+    so a downstream build never mistakes missing data for a clean pass.
+    """
 
     event: HackathonEvent
     score: float
     reasons: list[str]
+    unknowns: list[str] = field(default_factory=list)
 
 
 def score(
@@ -140,7 +146,34 @@ def score(
     ]
     total = sum(weight * fraction for weight, fraction, _ in components)
     reasons = [reason for _, fraction, reason in components if fraction > 0 and reason]
-    return RankedEvent(event=event, score=round(total, 4), reasons=reasons)
+    return RankedEvent(
+        event=event,
+        score=round(total, 4),
+        reasons=reasons,
+        unknowns=unknowns(event),
+    )
+
+
+def unknowns(event: HackathonEvent) -> list[str]:
+    """What the discovery feeds could not document for this event.
+
+    Cost and eligibility are never present in the Devpost or Hack Club feeds,
+    so they are always flagged rather than silently assumed free/open. The
+    list is explainable-rank output, not a score component: unknowns mark
+    where a human (or a later verification stage) must check the event page.
+    """
+    notes: list[str] = []
+    if event.deadline is None:
+        notes.append("Deadline unknown")
+    if event.prize_amount is None:
+        notes.append("Prize not listed")
+    elif parse_prize_amount(event.prize_amount) is None:
+        notes.append("Prize format unrecognized")
+    if event.location is None:
+        notes.append("Location/format unknown")
+    notes.append("Entry fee unknown (feeds list no cost data)")
+    notes.append("Eligibility restrictions unknown (not documented in feeds)")
+    return notes
 
 
 def _theme_reason(event: HackathonEvent, profile: InterestProfile) -> str | None:

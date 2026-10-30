@@ -17,6 +17,7 @@ from alexander.builder import (
     create_builder,
 )
 from alexander.discovery import discover_events
+from alexander.ledger import build_ledger, render_ledger_markdown
 from alexander.orchestrator import plan_run
 from alexander.ranking import (
     InterestProfile,
@@ -105,10 +106,70 @@ def _ranked_to_json(ranked: list[RankedEvent]) -> list[dict[str, object]]:
             "rank": position,
             "score": entry.score,
             "reasons": entry.reasons,
+            "unknowns": entry.unknowns,
             "event": entry.event.model_dump(mode="json"),
         }
         for position, entry in enumerate(ranked, start=1)
     ]
+
+
+@cli.command()
+@click.option("--no-cache", is_flag=True, default=False, help="Bypass the on-disk response cache.")
+@click.option(
+    "--profile",
+    "profile_path",
+    type=click.Path(path_type=Path),
+    default=None,
+    help="Path to a profile YAML file (default: profile.yaml or ~/.config/alexander/profile.yaml).",
+)
+@click.option(
+    "--pick",
+    default=1,
+    show_default=True,
+    type=click.IntRange(min=1),
+    help="Build the ledger for the event at this 1-based rank (matching `alexander rank`).",
+)
+@click.option("--json", "as_json", is_flag=True, default=False, help="Emit machine-readable JSON.")
+@click.option(
+    "--out",
+    "out_path",
+    type=click.Path(path_type=Path),
+    default=None,
+    help="Also write the ledger (markdown, or JSON with --json) to this file.",
+)
+def ledger(
+    no_cache: bool,
+    profile_path: Path | None,
+    pick: int,
+    as_json: bool,
+    out_path: Path | None,
+) -> None:
+    """Build a sourced requirement/rubric ledger for one ranked event."""
+    profile = _load_profile(profile_path)
+    events = discover_events(use_cache=not no_cache)
+    ranked = rank_events(events, profile)
+    if not ranked:
+        click.echo("No upcoming events to ledger. Run `alexander discover` to check the feeds.")
+        return
+    if not 1 <= pick <= len(ranked):
+        raise click.ClickException(
+            f"pick {pick} is out of range: only {len(ranked)} event(s) ranked"
+        )
+    ledger_doc = build_ledger(ranked[pick - 1].event)
+    rendered = (
+        ledger_doc.model_dump_json(indent=2) if as_json else render_ledger_markdown(ledger_doc)
+    )
+    click.echo(rendered)
+    if out_path is not None:
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(rendered, encoding="utf-8")
+        click.echo(f"Ledger written to {out_path}")
+    if ledger_doc.open_questions:
+        click.echo(
+            f"Warning: {len(ledger_doc.open_questions)} open question(s) must be resolved "
+            "against the official event page before building.",
+            err=True,
+        )
 
 
 @cli.command()

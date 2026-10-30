@@ -23,9 +23,11 @@ interests, then builds project codebases for them.
 ```
 
 - **Discovery** fetches the Devpost and Hack Club hackathon feeds, normalizes
-  both into one `HackathonEvent` model, deduplicates cross-source listings,
-  and caches raw responses on disk for an hour. A down feed is logged and
-  skipped — one dead source never blocks a run.
+  both into one `HackathonEvent` model, deduplicates cross-source listings
+  into canonical events (every surviving event credits each source that
+  reported it, and fields where the sources disagree are recorded as
+  `conflicts` rather than dropped), and caches raw responses on disk for an
+  hour. A down feed is logged and skipped — one dead source never blocks a run.
 - **Ranking** scores every upcoming event against your interest profile:
   theme keyword matches, deadline proximity, prize size, and location
   preference, each with configurable weights. Past-deadline events are
@@ -99,7 +101,27 @@ alexander rank --profile other.yaml
 Scoring rules worth knowing: keywords match case-insensitively against the
 event name and theme list; missing prizes and missing deadlines score neutral
 rather than zero; events whose deadline has already passed are **excluded**
-from the ranked output (they cannot be entered).
+from the ranked output (they cannot be entered). `rank --json` also reports
+each event's `unknowns` — what the feeds could not document (entry fee,
+eligibility, missing fields) — so missing data is never mistaken for a pass.
+
+### `alexander ledger`
+
+```bash
+alexander ledger                       # ledger for the top-ranked event
+alexander ledger --pick 2              # the event at rank 2
+alexander ledger --json                # machine-readable ledger
+alexander ledger --out ledgers/hack.md # also write it to a file
+```
+
+Turns one ranked event into a **sourced requirement/rubric ledger**: every
+confirmed requirement (deadline, prize, themes, format) is cited to the feed
+that documented it, and everything the feeds cannot document — entry fees,
+eligibility restrictions, judging criteria — is recorded as an explicit open
+question instead of an assumption. Cross-source conflicts discovered during
+dedupe surface here too, so contradictory requirements are flagged before any
+build is committed to the target. Resolve the open questions against the
+official event page before entering.
 
 ### `alexander run`
 
