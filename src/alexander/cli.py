@@ -26,6 +26,12 @@ from alexander.ranking import (
     resolve_profile_path,
 )
 from alexander.swarm import DEFAULT_REGISTRY_PATH, ClaimRegistry, SwarmOutcome, run_swarm
+from alexander.swarm.report import (
+    has_failed_build,
+    pending_slugs,
+    render_leaderboard,
+    write_report,
+)
 
 
 @click.group()
@@ -390,4 +396,45 @@ def swarm(
             f"{', '.join(pending)}"
         )
     if failed:
+        raise SystemExit(1)
+
+
+@cli.command("swarm-report")
+@click.option(
+    "--registry",
+    "registry_path",
+    type=click.Path(path_type=Path),
+    default=DEFAULT_REGISTRY_PATH,
+    show_default=True,
+    help="Path to the SQLite claim registry to read.",
+)
+@click.option(
+    "--out",
+    "out_root",
+    type=click.Path(path_type=Path),
+    default=Path("builds"),
+    show_default=True,
+    help="Directory for the swarm-report.json artifact.",
+)
+def swarm_report(registry_path: Path, out_root: Path) -> None:
+    """Print the swarm leaderboard and write swarm-report.json."""
+    # Opening the registry creates it if absent, so a fresh machine reports
+    # an empty table instead of crashing.
+    registry = ClaimRegistry(registry_path)
+    try:
+        rows = registry.results()
+    finally:
+        registry.close()
+
+    click.echo(render_leaderboard(rows))
+    report_path = write_report(rows, out_root)
+    click.echo(f"Report written to {report_path}")
+    pending = pending_slugs(rows)
+    if pending:
+        click.echo(
+            f"Warning: {len(pending)} pending claim(s) belong to other or unfinished runs: "
+            f"{', '.join(pending)}",
+            err=True,
+        )
+    if has_failed_build(rows):
         raise SystemExit(1)
