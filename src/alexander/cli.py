@@ -26,6 +26,23 @@ from alexander.ranking import (
     rank_events,
     resolve_profile_path,
 )
+from alexander.repos import (
+    CreateOutcome,
+    CreatorError,
+    FixtureRepoCreator,
+    GhRepoCreator,
+    ManifestCorruptError,
+    RemoteIdentity,
+    RepoManifest,
+    RepoNameError,
+    RepoSpec,
+    SeedOutcome,
+    default_manifest_path,
+    ensure_repo,
+    owner_from_url,
+    repo_name_from_slug,
+    seed_repo,
+)
 from alexander.swarm import DEFAULT_REGISTRY_PATH, ClaimRegistry, SwarmOutcome, run_swarm
 from alexander.swarm.report import (
     has_failed_build,
@@ -499,3 +516,98 @@ def swarm_report(registry_path: Path, out_root: Path) -> None:
         )
     if has_failed_build(rows):
         raise SystemExit(1)
+
+
+@cli.group()
+def repo() -> None:
+    """Create remote repositories for builds, idempotently."""
+
+
+@repo.command("create")
+@click.option(
+    "--slug",
+    "slug",
+    required=True,
+    help="Event slug: the idempotency key (matching builds/<slug> from `alexander run`).",
+)
+@click.option(
+    "--from",
+    "source_dir",
+    type=click.Path(exists=True, file_okay=False, path_type=Path),
+    default=None,
+    help="Build directory to seed the repository with (pushed once, never over history).",
+)
+@click.option("--name", "name", default=None, help="Repository name (default: the slug).")
+@click.option("--description", default="", help="Repository description.")
+@click.option(
+    "--public",
+    "is_public",
+    is_flag=True,
+    default=False,
+    help="Create a public repository (the default is private).",
+)
+@click.option(
+    "--backend",
+    default="gh",
+    show_default=True,
+    type=click.Choice(["gh", "fixture"]),
+    help="'gh' creates real GitHub repositories; 'fixture' runs fully offline.",
+)
+@click.option(
+    "--manifest",
+    "manifest_path",
+    type=click.Path(path_type=Path),
+    default=None,
+    help="Manifest path (default: ~/.local/state/alexander/repo-manifest.json).",
+)
+def repo_create(
+    slug: str,
+    source_dir: Path | None,
+    name: str | None,
+    description: str,
+    is_public: bool,
+    backend: str,
+    manifest_path: Path | None,
+) -> None:
+    """Create (or adopt) one repository for a build — safe to re-run.
+
+    A re-run with the same slug is a no-op: the manifest short-circuits it,
+    and the backend reports already-exists rather than duplicating. Seeding
+    refuses to touch a remote that already has commits.
+    """
+    try:
+        spec = RepoSpec(
+            slug=slug,
+            name=repo_name_from_slug(name) if name else repo_name_from_slug(slug),
+            description=description,
+            private=not is_public,
+            source_dir=source_dir,
+        )
+    except RepoNameError as exc:
+        raise click.UsageError(str(exc)) from exc
+
+    creator: FixtureRepoCreator | GhRepoCreator = (
+        FixtureRepoCreator() if backend == "fixture" else GhRepoCreator()
+    )
+    manifest = RepoManifest(manifest_path if manifest_path else default_manifest_path())
+
+    try:
+        result = ensure_repo(spec, creator, manifest)
+    except (ManifestCorruptError, CreatorError) as exc:
+        raise click.ClickException(str(exc)) from exc
+
+    if result.outcome is CreateOutcome.CREATED:
+        click.echo(f"created {result.url}")
+    elif result.outcome is CreateOutcome.EXISTS:
+        # A previous run created it but died before recording — state healed.
+        click.echo(f"already on the remote (now recorded): {result.url}")
+    else:
+        click.echo(f"already on record, nothing done: {result.url}")
+
+    seed_result = seed_repo(
+        spec, creator, manifest, RemoteIdentity(owner=owner_from_url(result.url), url=result.url)
+    )
+    if seed_result.outcome is SeedOutcome.SEEDED:
+        click.echo(f"seeded: {seed_result.detail}")
+    elif seed_result.outcome is SeedOutcome.REFUSED:
+        click.echo(f"warning: seeding refused, remote untouched: {seed_result.detail}", err=True)

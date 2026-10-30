@@ -209,6 +209,17 @@ result = asyncio.run(
 print(result.status, result.artifact_path, result.test_summary)
 ```
 
+### `alexander repo create`
+
+```bash
+alexander repo create --slug sample-hack-2026                     # create, private
+alexander repo create --slug sample-hack-2026 --from builds/sample-hack-2026
+alexander repo create --slug sample-hack-2026 --backend fixture   # offline demo
+```
+
+Creates the GitHub repository for a finished build (via the `gh` CLI) and,
+with `--from`, seeds it with an initial push of the build directory.
+
 ## Claim registry
 
 The swarm's only shared state is a SQLite claim registry (stdlib `sqlite3`,
@@ -231,6 +242,26 @@ recording, the row stays `claimed`: `swarm-report` lists it as **pending**
 for a human decision rather than auto-reclaiming. Multiple coordinators can
 run at once without harm — claiming stays atomic, and the registry file is
 created on first use.
+
+## Repository creation is idempotent
+
+`alexander repo create` is safe to re-run by construction. Three layers keep
+retries and re-runs from duplicating or corrupting state:
+
+1. **Manifest first.** Every created repository is recorded in a durable
+   JSON manifest (default `~/.local/state/alexander/repo-manifest.json`,
+   override with `--manifest`; writes are atomic). A re-run for the same
+   event slug hits the manifest and never calls the remote at all.
+2. **Already-exists is adoption, not an error.** If a previous run died
+   after creating the remote but before recording it, the next run adopts
+   the existing repository from the backend's `already exists` response
+   and heals the manifest. Either way there is exactly one repository.
+3. **Seeding never overwrites history.** The initial push happens only if
+   the remote has zero commits; otherwise seeding refuses and leaves the
+   remote untouched. A push may happen once or not at all — never twice.
+
+Slugs are the idempotency keys (matching `builds/<slug>`); the fixture
+backend (`--backend fixture`) exercises the whole flow offline.
 
 ## Backends
 
