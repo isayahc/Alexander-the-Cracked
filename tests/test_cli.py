@@ -14,9 +14,3 @@ def test_cli_help() -> None:
     result = CliRunner().invoke(cli, ["--help"])
     assert result.exit_code == 0
     assert "discover" in result.output
-
-
-def test_discover_stub() -> None:
-    result = CliRunner().invoke(cli, ["discover"])
-    assert result.exit_code == 0
-    assert "not implemented yet" in result.output
