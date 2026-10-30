@@ -3,12 +3,16 @@
 from datetime import datetime
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 EventSource = Literal["devpost", "hackclub"]
 
 # Fields consulted when deciding which duplicate event survives dedupe.
 _FILLED_FIELDS = ("deadline", "prize_amount", "location", "starts_at", "ends_at")
+
+# Fields whose diverging values are recorded as cross-source conflicts on the
+# canonical (merged) event instead of being silently dropped.
+_CONFLICT_FIELDS = ("deadline", "prize_amount", "location")
 
 
 class HackathonEvent(BaseModel):
@@ -30,6 +34,19 @@ class HackathonEvent(BaseModel):
     ends_at: datetime | None = None
     raw_submission_period: str | None = None
     raw: dict[str, Any] = Field(default_factory=dict)
+    # Canonical-event bookkeeping (filled by dedupe, not by the feeds):
+    # every source that reported this event, and the diverging values each
+    # source claimed for a field, so attribution and contradictions survive
+    # merging instead of being dropped with the discarded duplicate.
+    sources: list[EventSource] = Field(default_factory=list)
+    conflicts: dict[str, list[str]] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def _default_sources(self) -> "HackathonEvent":
+        """Treat a bare feed item as attributed to its own source."""
+        if not self.sources:
+            self.sources = [self.source]
+        return self
 
     @property
     def filled_field_count(self) -> int:

@@ -1,14 +1,17 @@
-"""Normalization and dedupe across discovery sources.
+"""Normalization and canonical-event dedupe across discovery sources.
 
 Two events collapse into one when they share the same normalized URL, or
 share a very similar normalized name AND their date ranges overlap. When a
-group collapses we keep the event with more optional fields filled.
+group collapses we keep the event with more optional fields filled, then
+upgrade it to a canonical record: every source that reported the event is
+credited in ``sources``, and fields where the sources disagree are recorded
+in ``conflicts`` instead of silently dropping the losing value.
 """
 
 import re
 from datetime import datetime
 
-from alexander.discovery.models import HackathonEvent
+from alexander.discovery.models import _CONFLICT_FIELDS, HackathonEvent
 
 _URL_STRIP_RE = re.compile(r"^(https?://)?(www\.)?")
 _NAME_KEEP_RE = re.compile(r"[a-z0-9]+")
@@ -57,6 +60,45 @@ def _winner(a: HackathonEvent, b: HackathonEvent) -> HackathonEvent:
     return a
 
 
+def _field_claims(event: HackathonEvent, field: str) -> list[str]:
+    """Source-tagged claims already recorded for ``field`` on a canonical event."""
+    return event.conflicts.get(field, [])
+
+
+def _format_value(value: object) -> str:
+    """Render a field value for the conflict record (dates as ISO strings)."""
+    return value.isoformat() if isinstance(value, datetime) else str(value)
+
+
+def _merge(winner: HackathonEvent, loser: HackathonEvent) -> HackathonEvent:
+    """Upgrade the surviving duplicate to a canonical event.
+
+    Attribution accumulates (both sources credited); a field is added to
+    ``conflicts`` when the two sources claim different non-null values, and
+    every claim stays source-tagged so contradictions remain traceable.
+    """
+    sources = list(dict.fromkeys([*winner.sources, *loser.sources]))
+    conflicts: dict[str, list[str]] = {
+        field: list(claims) for field, claims in winner.conflicts.items()
+    }
+    for field in _CONFLICT_FIELDS:
+        winner_value = getattr(winner, field)
+        loser_value = getattr(loser, field)
+        if winner_value is None or loser_value is None:
+            continue
+        if winner_value == loser_value:
+            continue
+        claims = _field_claims(winner, field)
+        winner_claim = f"{winner.source}: {_format_value(winner_value)}"
+        if winner_claim not in claims:
+            claims.append(winner_claim)
+        loser_claim = f"{loser.source}: {_format_value(loser_value)}"
+        if loser_claim not in claims:
+            claims.append(loser_claim)
+        conflicts[field] = claims
+    return winner.model_copy(update={"sources": sources, "conflicts": conflicts})
+
+
 def dedupe(events: list[HackathonEvent]) -> list[HackathonEvent]:
     """Collapse duplicate events across sources, preserving first-seen order."""
     kept: list[HackathonEvent] = []
@@ -65,6 +107,7 @@ def dedupe(events: list[HackathonEvent]) -> list[HackathonEvent]:
         if match is None:
             kept.append(event)
         else:
-            merged = _winner(match, event)
+            winner = _winner(match, event)
+            merged = _merge(winner, event if winner is match else match)
             kept[kept.index(match)] = merged
     return kept
