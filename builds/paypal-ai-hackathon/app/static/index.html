@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PayPilot - your PayPal copilot</title>
+<style>
+  :root { --ink: #10192e; --paper: #f5f7fb; --blue: #0070ba; --teal: #00a4a4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--paper); color: var(--ink); }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: #fff; border-bottom: 1px solid #e3e8f0; }
+  header h1 { font-size: 18px; margin: 0; }
+  .badge { font-size: 12px; padding: 3px 10px; border-radius: 999px; background: #eef4ff; color: var(--blue); }
+  .badge.demo { background: #fff4e0; color: #a06a00; }
+  #chat { max-width: 720px; margin: 0 auto; padding: 20px; height: calc(100vh - 130px); overflow-y: auto; }
+  .msg { margin: 10px 0; padding: 10px 14px; border-radius: 12px; max-width: 80%; white-space: pre-wrap; line-height: 1.45; }
+  .user { background: var(--blue); color: #fff; margin-left: auto; }
+  .bot { background: #fff; border: 1px solid #e3e8f0; }
+  .bot.needs_confirmation { border-color: #f0a000; background: #fffaf0; }
+  .bot.blocked, .bot.error { border-color: #d0021b; background: #fdf0f0; }
+  .meta { font-size: 11px; opacity: 0.6; margin-top: 4px; }
+  form { display: flex; gap: 8px; max-width: 720px; margin: 0 auto; padding: 12px 20px 20px; }
+  input { flex: 1; padding: 12px 14px; border-radius: 10px; border: 1px solid #c9d2e0; font-size: 15px; }
+  button { padding: 12px 20px; border-radius: 10px; border: none; background: var(--blue); color: #fff; font-size: 15px; cursor: pointer; }
+  button.confirm { background: var(--teal); margin-top: 8px; padding: 8px 16px; font-size: 14px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>PayPilot</h1>
+  <span id="mode" class="badge">loading&hellip;</span>
+</header>
+<div id="chat"></div>
+<form id="composer">
+  <input id="text" autocomplete="off" placeholder='Try: "create an order for $49.99 to Alice for lunch"' />
+  <button type="submit">Send</button>
+</form>
+<script>
+const chat = document.getElementById("chat");
+const sessionId = crypto.randomUUID ? crypto.randomUUID() : String(Math.random());
+
+async function refreshMode() {
+  const health = await fetch("/health").then(r => r.json());
+  const badge = document.getElementById("mode");
+  badge.textContent = health.mode === "demo"
+    ? "DEMO mode - scripted PayPal data (no credentials)"
+    : "PayPal sandbox - live (sandbox) API";
+  badge.className = "badge" + (health.mode === "demo" ? " demo" : "");
+}
+
+function addBubble(kind, text, status) {
+  const div = document.createElement("div");
+  div.className = "msg " + kind + (status ? " " + status : "");
+  div.textContent = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+  return div;
+}
+
+async function send(text) {
+  addBubble("user", text);
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text, session_id: sessionId }),
+  });
+  const turn = await response.json();
+  const bubble = addBubble("bot", turn.message, turn.status);
+  if (turn.status === "needs_confirmation") {
+    const button = document.createElement("button");
+    button.className = "confirm";
+    button.textContent = "Confirm";
+    button.onclick = () => { button.remove(); send("confirm"); };
+    bubble.appendChild(button);
+  }
+}
+
+document.getElementById("composer").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const input = document.getElementById("text");
+  if (input.value.trim()) send(input.value.trim());
+  input.value = "";
+});
+
+addBubble("bot", "Hi! I'm PayPilot, your PayPal copilot. I can draft payments, capture and refund (with your explicit confirmation), review recent transactions, and flag anything suspicious. Ask me for help to see everything.");
+refreshMode();
+</script>
+</body>
+</html>
