@@ -1,0 +1,11 @@
+{
+  "event_name": "PayPal AI Hackathon",
+  "description": "Build a small, working project suitable for submission to PayPal AI Hackathon (themes: Low/No Code, Machine Learning/AI, Web). Event page: https://paypalaihackathon.devpost.com/.",
+  "themes": [
+    "Low/No Code",
+    "Machine Learning/AI",
+    "Web"
+  ],
+  "deadline": "2026-11-12",
+  "prize": "$67,500"
+}

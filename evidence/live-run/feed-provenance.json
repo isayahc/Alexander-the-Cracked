@@ -1,0 +1,16 @@
+{
+  "traced_event_slug": "paypal-ai-hackathon-360e79c1",
+  "ranked_upcoming": 23,
+  "feeds": {
+    "https://devpost.com/api/hackathons": {
+      "fetched_at_epoch": 1793398068.9700513,
+      "fetched_at_utc": "2026-10-30T22:07:48.970051+00:00",
+      "payload_sha256": "1d6e8a16490e25189de8ea13bde687b50a4028de522d6cf9f78e6cea41a43070"
+    },
+    "https://hackathons.hackclub.com/api/events/upcoming": {
+      "fetched_at_epoch": 1793398073.5198967,
+      "fetched_at_utc": "2026-10-30T22:07:53.519897+00:00",
+      "payload_sha256": "4df888c1550c284a72f56f21fe9e39d21a20ac71d16176b60805f96de836b98a"
+    }
+  }
+}

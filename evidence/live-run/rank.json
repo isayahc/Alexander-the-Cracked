@@ -1,0 +1,1330 @@
+[
+  {
+    "rank": 1,
+    "score": 5.1948,
+    "reasons": [
+      "Matches interests: ai, web",
+      "Deadline in 12 day(s)",
+      "Prize $67,500",
+      "Location preference: Online"
+    ],
+    "unknowns": [
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "PayPal AI Hackathon",
+      "url": "https://paypalaihackathon.devpost.com/",
+      "source": "devpost",
+      "deadline": "2026-11-12T00:00:00Z",
+      "prize_amount": "$67,500",
+      "themes": [
+        "Low/No Code",
+        "Machine Learning/AI",
+        "Web"
+      ],
+      "location": "Online",
+      "starts_at": "2026-10-01T00:00:00Z",
+      "ends_at": "2026-11-12T00:00:00Z",
+      "raw_submission_period": "Oct 01 - Nov 12, 2026",
+      "raw": {
+        "id": 31302,
+        "title": "PayPal AI Hackathon",
+        "displayed_location": {
+          "icon": "globe",
+          "location": "Online"
+        },
+        "open_state": "open",
+        "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/288/985/datas/medium_square.png",
+        "analytics_identifier": "PayPal AI Hackathon (31302)",
+        "url": "https://paypalaihackathon.devpost.com/",
+        "time_left_to_submission": "13 days left",
+        "submission_period_dates": "Oct 01 - Nov 12, 2026",
+        "themes": [
+          {
+            "id": 17,
+            "name": "Low/No Code"
+          },
+          {
+            "id": 6,
+            "name": "Machine Learning/AI"
+          },
+          {
+            "id": 25,
+            "name": "Web"
+          }
+        ],
+        "prize_amount": "$<span data-currency-value>67,500</span>",
+        "prizes_counts": {
+          "cash": 1,
+          "other": 0
+        },
+        "registrations_count": 24879,
+        "featured": false,
+        "organization_name": "PayPal",
+        "winners_announced": false,
+        "submission_gallery_url": "https://paypalaihackathon.devpost.com/project-gallery",
+        "start_a_submission_url": "https://paypalaihackathon.devpost.com/challenges/start_a_submission",
+        "invite_only": false,
+        "eligibility_requirement_invite_only_description": null,
+        "managed_by_devpost_badge": true
+      },
+      "sources": [
+        "devpost"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 2,
+    "score": 5.1115,
+    "reasons": [
+      "Matches interest: ai",
+      "Deadline in 2 day(s)",
+      "Prize $25,000",
+      "Location preference: Online"
+    ],
+    "unknowns": [
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Codex x TwitchCon Hackathon",
+      "url": "https://twitchcon-codex.devpost.com/",
+      "source": "devpost",
+      "deadline": "2026-11-02T00:00:00Z",
+      "prize_amount": "$25,000",
+      "themes": [
+        "Communication",
+        "Gaming",
+        "Machine Learning/AI"
+      ],
+      "location": "Online",
+      "starts_at": "2026-10-23T00:00:00Z",
+      "ends_at": "2026-11-02T00:00:00Z",
+      "raw_submission_period": "Oct 23 - Nov 02, 2026",
+      "raw": {
+        "id": 31742,
+        "title": "Codex x TwitchCon Hackathon",
+        "displayed_location": {
+          "icon": "globe",
+          "location": "Online"
+        },
+        "open_state": "open",
+        "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/656/411/datas/medium_square.png",
+        "analytics_identifier": "Codex x TwitchCon Hackathon (31742)",
+        "url": "https://twitchcon-codex.devpost.com/",
+        "time_left_to_submission": "3 days left",
+        "submission_period_dates": "Oct 23 - Nov 02, 2026",
+        "themes": [
+          {
+            "id": 10,
+            "name": "Communication"
+          },
+          {
+            "id": 4,
+            "name": "Gaming"
+          },
+          {
+            "id": 6,
+            "name": "Machine Learning/AI"
+          }
+        ],
+        "prize_amount": "$<span data-currency-value>25,000</span>",
+        "prizes_counts": {
+          "cash": 4,
+          "other": 0
+        },
+        "registrations_count": 1774,
+        "featured": true,
+        "organization_name": "Twitch",
+        "winners_announced": false,
+        "submission_gallery_url": "https://twitchcon-codex.devpost.com/project-gallery",
+        "start_a_submission_url": "https://twitchcon-codex.devpost.com/challenges/start_a_submission",
+        "invite_only": false,
+        "eligibility_requirement_invite_only_description": null,
+        "managed_by_devpost_badge": true
+      },
+      "sources": [
+        "devpost"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 3,
+    "score": 4.7948,
+    "reasons": [
+      "Matches interests: ai, web",
+      "Deadline in 18 day(s)",
+      "Prize $1,000,000",
+      "Location preference: Online"
+    ],
+    "unknowns": [
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Meta VR Start Developer Competition 2026",
+      "url": "https://start-developer-competition-26.devpost.com/",
+      "source": "devpost",
+      "deadline": "2026-11-18T00:00:00Z",
+      "prize_amount": "$1,000,000",
+      "themes": [
+        "AR/VR",
+        "Machine Learning/AI",
+        "Web"
+      ],
+      "location": "Online",
+      "starts_at": "2026-09-24T00:00:00Z",
+      "ends_at": "2026-11-18T00:00:00Z",
+      "raw_submission_period": "Sep 24 - Nov 18, 2026",
+      "raw": {
+        "id": 31024,
+        "title": "Meta VR Start Developer Competition 2026",
+        "displayed_location": {
+          "icon": "globe",
+          "location": "Online"
+        },
+        "open_state": "open",
+        "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/374/843/datas/medium_square.png",
+        "analytics_identifier": "Meta VR Start Developer Competition 2026 (31024)",
+        "url": "https://start-developer-competition-26.devpost.com/",
+        "time_left_to_submission": "19 days left",
+        "submission_period_dates": "Sep 24 - Nov 18, 2026",
+        "themes": [
+          {
+            "id": 5,
+            "name": "AR/VR"
+          },
+          {
+            "id": 6,
+            "name": "Machine Learning/AI"
+          },
+          {
+            "id": 25,
+            "name": "Web"
+          }
+        ],
+        "prize_amount": "$<span data-currency-value>1,000,000</span>",
+        "prizes_counts": {
+          "cash": 1,
+          "other": 0
+        },
+        "registrations_count": 4616,
+        "featured": true,
+        "organization_name": "Meta",
+        "winners_announced": false,
+        "submission_gallery_url": "https://start-developer-competition-26.devpost.com/project-gallery",
+        "start_a_submission_url": "https://start-developer-competition-26.devpost.com/challenges/start_a_submission",
+        "invite_only": false,
+        "eligibility_requirement_invite_only_description": null,
+        "managed_by_devpost_badge": true
+      },
+      "sources": [
+        "devpost"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 4,
+    "score": 4.5115,
+    "reasons": [
+      "Matches interest: ai",
+      "Deadline in 2 day(s)",
+      "Prize $6,000",
+      "Location preference: Online"
+    ],
+    "unknowns": [
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "YouCam API Skin AI & eCommerce VTO Hackathon",
+      "url": "https://youcam-api-skin-ai-ecommerce.devpost.com/",
+      "source": "devpost",
+      "deadline": "2026-11-02T00:00:00Z",
+      "prize_amount": "$6,000",
+      "themes": [
+        "AR/VR",
+        "E-commerce/Retail",
+        "Machine Learning/AI"
+      ],
+      "location": "Online",
+      "starts_at": "2026-09-29T00:00:00Z",
+      "ends_at": "2026-11-02T00:00:00Z",
+      "raw_submission_period": "Sep 29 - Nov 02, 2026",
+      "raw": {
+        "id": 31400,
+        "title": "YouCam API Skin AI & eCommerce VTO Hackathon",
+        "displayed_location": {
+          "icon": "globe",
+          "location": "Online"
+        },
+        "open_state": "open",
+        "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/375/196/datas/medium_square.png",
+        "analytics_identifier": "YouCam API Skin AI & eCommerce VTO Hackathon (31400)",
+        "url": "https://youcam-api-skin-ai-ecommerce.devpost.com/",
+        "time_left_to_submission": "3 days left",
+        "submission_period_dates": "Sep 29 - Nov 02, 2026",
+        "themes": [
+          {
+            "id": 5,
+            "name": "AR/VR"
+          },
+          {
+            "id": 20,
+            "name": "E-commerce/Retail"
+          },
+          {
+            "id": 6,
+            "name": "Machine Learning/AI"
+          }
+        ],
+        "prize_amount": "$<span data-currency-value>6,000</span>",
+        "prizes_counts": {
+          "cash": 1,
+          "other": 0
+        },
+        "registrations_count": 1519,
+        "featured": true,
+        "organization_name": "Perfect Corp",
+        "winners_announced": false,
+        "submission_gallery_url": "https://youcam-api-skin-ai-ecommerce.devpost.com/project-gallery",
+        "start_a_submission_url": "https://youcam-api-skin-ai-ecommerce.devpost.com/challenges/start_a_submission",
+        "invite_only": false,
+        "eligibility_requirement_invite_only_description": null,
+        "managed_by_devpost_badge": false
+      },
+      "sources": [
+        "devpost"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 5,
+    "score": 4.1781,
+    "reasons": [
+      "Matches interest: ai",
+      "Deadline in 16 day(s)",
+      "Prize $46,000",
+      "Location preference: Online"
+    ],
+    "unknowns": [
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "UGREEN Hackathon 2026 on AI NAS",
+      "url": "https://ugreenhackathon.devpost.com/",
+      "source": "devpost",
+      "deadline": "2026-11-16T00:00:00Z",
+      "prize_amount": "$46,000",
+      "themes": [
+        "Lifehacks",
+        "Machine Learning/AI",
+        "Productivity"
+      ],
+      "location": "Online",
+      "starts_at": "2026-10-22T00:00:00Z",
+      "ends_at": "2026-11-16T00:00:00Z",
+      "raw_submission_period": "Oct 22 - Nov 16, 2026",
+      "raw": {
+        "id": 31552,
+        "title": "UGREEN Hackathon 2026 on AI NAS",
+        "displayed_location": {
+          "icon": "globe",
+          "location": "Online"
+        },
+        "open_state": "open",
+        "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/624/690/datas/medium_square.png",
+        "analytics_identifier": "UGREEN Hackathon 2026 on AI NAS (31552)",
+        "url": "https://ugreenhackathon.devpost.com/",
+        "time_left_to_submission": "16 days left",
+        "submission_period_dates": "Oct 22 - Nov 16, 2026",
+        "themes": [
+          {
+            "id": 12,
+            "name": "Lifehacks"
+          },
+          {
+            "id": 6,
+            "name": "Machine Learning/AI"
+          },
+          {
+            "id": 11,
+            "name": "Productivity"
+          }
+        ],
+        "prize_amount": "$<span data-currency-value>46,000</span>",
+        "prizes_counts": {
+          "cash": 4,
+          "other": 0
+        },
+        "registrations_count": 877,
+        "featured": false,
+        "organization_name": "UGREEN",
+        "winners_announced": false,
+        "submission_gallery_url": "https://ugreenhackathon.devpost.com/project-gallery",
+        "start_a_submission_url": "https://ugreenhackathon.devpost.com/challenges/start_a_submission",
+        "invite_only": false,
+        "eligibility_requirement_invite_only_description": null,
+        "managed_by_devpost_badge": false
+      },
+      "sources": [
+        "devpost"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 6,
+    "score": 3.6948,
+    "reasons": [
+      "Deadline in 1 day(s)",
+      "Location preference: Online"
+    ],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Founding-100",
+      "url": "https://founding-100.waycode.in/",
+      "source": "hackclub",
+      "deadline": "2026-10-31T18:00:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Online",
+      "starts_at": "2026-10-22T18:00:00Z",
+      "ends_at": "2026-10-31T18:00:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "r9bI7N",
+        "name": "Founding-100",
+        "website": "https://founding-100.waycode.in/",
+        "start": "2026-10-22T18:00:00.000Z",
+        "end": "2026-10-31T18:00:00.000Z",
+        "createdAt": "2026-10-18T13:24:00.449Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjA5OSwicHVyIjoiYmxvYl9pZCJ9fQ==--ff4ab1e72507ba6bcc48ac3ab9f66c63160240b9/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJ3ZWJwIiwicmVzaXplX3RvX2xpbWl0IjpbMTI4LDEyOF19LCJwdXIiOiJ2YXJpYXRpb24ifX0=--a686d78007605c5872c1fba506536ea754ff5af9/logo.webp",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjEwMywicHVyIjoiYmxvYl9pZCJ9fQ==--925371b0af9ff9118ae47354b70ff7da4a8b4917/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--797f7952fb61db955e058b888e66d8ecb495e15b/IMG_20261018_191908.jpg",
+        "city": null,
+        "state": null,
+        "country": null,
+        "countryCode": null,
+        "latitude": null,
+        "longitude": null,
+        "virtual": true,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 7,
+    "score": 3.5198,
+    "reasons": [
+      "Matches interest: ai",
+      "Deadline in 9 day(s)",
+      "Prize $2,500",
+      "Location preference: Online"
+    ],
+    "unknowns": [
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Learn AR with SPECS",
+      "url": "https://learn-specs.devpost.com/",
+      "source": "devpost",
+      "deadline": "2026-11-09T00:00:00Z",
+      "prize_amount": "$2,500",
+      "themes": [
+        "AR/VR",
+        "Machine Learning/AI",
+        "Design"
+      ],
+      "location": "Online",
+      "starts_at": "2026-10-15T00:00:00Z",
+      "ends_at": "2026-11-09T00:00:00Z",
+      "raw_submission_period": "Oct 15 - Nov 09, 2026",
+      "raw": {
+        "id": 31659,
+        "title": "Learn AR with SPECS",
+        "displayed_location": {
+          "icon": "globe",
+          "location": "Online"
+        },
+        "open_state": "open",
+        "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/541/121/datas/medium_square.png",
+        "analytics_identifier": "Learn AR with SPECS (31659)",
+        "url": "https://learn-specs.devpost.com/",
+        "time_left_to_submission": "10 days left",
+        "submission_period_dates": "Oct 15 - Nov 09, 2026",
+        "themes": [
+          {
+            "id": 5,
+            "name": "AR/VR"
+          },
+          {
+            "id": 6,
+            "name": "Machine Learning/AI"
+          },
+          {
+            "id": 18,
+            "name": "Design"
+          }
+        ],
+        "prize_amount": "$<span data-currency-value>2,500</span>",
+        "prizes_counts": {
+          "cash": 3,
+          "other": 0
+        },
+        "registrations_count": 988,
+        "featured": false,
+        "organization_name": "Devpost",
+        "winners_announced": false,
+        "submission_gallery_url": "https://learn-specs.devpost.com/project-gallery",
+        "start_a_submission_url": "https://learn-specs.devpost.com/challenges/start_a_submission",
+        "invite_only": false,
+        "eligibility_requirement_invite_only_description": null,
+        "managed_by_devpost_badge": true
+      },
+      "sources": [
+        "devpost"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 8,
+    "score": 3.25,
+    "reasons": [
+      "Matches interest: ai",
+      "Prize $100,000",
+      "Location preference: Online"
+    ],
+    "unknowns": [
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Kiroween 2026",
+      "url": "https://kiroween.devpost.com/",
+      "source": "devpost",
+      "deadline": "2026-12-04T00:00:00Z",
+      "prize_amount": "$100,000",
+      "themes": [
+        "Beginner Friendly",
+        "Machine Learning/AI",
+        "Open Ended"
+      ],
+      "location": "Online",
+      "starts_at": "2026-10-30T00:00:00Z",
+      "ends_at": "2026-12-04T00:00:00Z",
+      "raw_submission_period": "Oct 30 - Dec 04, 2026",
+      "raw": {
+        "id": 31667,
+        "title": "Kiroween 2026",
+        "displayed_location": {
+          "icon": "globe",
+          "location": "Online"
+        },
+        "open_state": "open",
+        "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/585/149/datas/medium_square.png",
+        "analytics_identifier": "Kiroween 2026 (31667)",
+        "url": "https://kiroween.devpost.com/",
+        "time_left_to_submission": "about 1 month left",
+        "submission_period_dates": "Oct 30 - Dec 04, 2026",
+        "themes": [
+          {
+            "id": 23,
+            "name": "Beginner Friendly"
+          },
+          {
+            "id": 6,
+            "name": "Machine Learning/AI"
+          },
+          {
+            "id": 22,
+            "name": "Open Ended"
+          }
+        ],
+        "prize_amount": "$<span data-currency-value>100,000</span>",
+        "prizes_counts": {
+          "cash": 15,
+          "other": 2
+        },
+        "registrations_count": 2618,
+        "featured": true,
+        "organization_name": "Kiro",
+        "winners_announced": false,
+        "submission_gallery_url": "https://kiroween.devpost.com/project-gallery",
+        "start_a_submission_url": "https://kiroween.devpost.com/challenges/start_a_submission",
+        "invite_only": false,
+        "eligibility_requirement_invite_only_description": null,
+        "managed_by_devpost_badge": true
+      },
+      "sources": [
+        "devpost"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 9,
+    "score": 3.25,
+    "reasons": [
+      "Matches interest: ai",
+      "Prize $120,000",
+      "Location preference: Online"
+    ],
+    "unknowns": [
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Codegeist 2026: Build with context. Ship with confidence.",
+      "url": "https://codegeist2026.devpost.com/",
+      "source": "devpost",
+      "deadline": "2026-12-22T00:00:00Z",
+      "prize_amount": "$120,000",
+      "themes": [
+        "Machine Learning/AI",
+        "Enterprise",
+        "Productivity"
+      ],
+      "location": "Online",
+      "starts_at": "2026-10-27T00:00:00Z",
+      "ends_at": "2026-12-22T00:00:00Z",
+      "raw_submission_period": "Oct 27 - Dec 22, 2026",
+      "raw": {
+        "id": 31572,
+        "title": "Codegeist 2026: Build with context. Ship with confidence.",
+        "displayed_location": {
+          "icon": "globe",
+          "location": "Online"
+        },
+        "open_state": "open",
+        "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/624/479/datas/medium_square.png",
+        "analytics_identifier": "Codegeist 2026: Build with context. Ship with confidence. (31572)",
+        "url": "https://codegeist2026.devpost.com/",
+        "time_left_to_submission": "about 2 months left",
+        "submission_period_dates": "Oct 27 - Dec 22, 2026",
+        "themes": [
+          {
+            "id": 6,
+            "name": "Machine Learning/AI"
+          },
+          {
+            "id": 21,
+            "name": "Enterprise"
+          },
+          {
+            "id": 11,
+            "name": "Productivity"
+          }
+        ],
+        "prize_amount": "$<span data-currency-value>120,000</span>",
+        "prizes_counts": {
+          "cash": 7,
+          "other": 1
+        },
+        "registrations_count": 839,
+        "featured": false,
+        "organization_name": "Atlassian",
+        "winners_announced": false,
+        "submission_gallery_url": "https://codegeist2026.devpost.com/project-gallery",
+        "start_a_submission_url": "https://codegeist2026.devpost.com/challenges/start_a_submission",
+        "invite_only": false,
+        "eligibility_requirement_invite_only_description": null,
+        "managed_by_devpost_badge": true
+      },
+      "sources": [
+        "devpost"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 10,
+    "score": 2.199,
+    "reasons": [
+      "Deadline in 8 day(s)"
+    ],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Falcon Hacks",
+      "url": "https://falconhacks2026.com",
+      "source": "hackclub",
+      "deadline": "2026-11-08T04:30:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Pleasanton, California, United States",
+      "starts_at": "2026-11-07T16:00:00Z",
+      "ends_at": "2026-11-08T04:30:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "r8QIdy",
+        "name": "Falcon Hacks",
+        "website": "https://falconhacks2026.com",
+        "start": "2026-11-07T16:00:00.000Z",
+        "end": "2026-11-08T04:30:00.000Z",
+        "createdAt": "2026-10-18T23:39:11.354Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjEwNiwicHVyIjoiYmxvYl9pZCJ9fQ==--5570659c6ba23a8af29dd2161dfbbc97f6cf84bf/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/Foothill_logo.png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjEwNywicHVyIjoiYmxvYl9pZCJ9fQ==--ca915bfde0ee26ffc7d4c09727e35466d697f8a4/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/falconhacks_banner.png",
+        "city": "Pleasanton",
+        "state": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "latitude": 37.658435,
+        "longitude": -121.876997,
+        "virtual": false,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 11,
+    "score": 1.75,
+    "reasons": [
+      "Location preference: Online"
+    ],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Pixel Forge Mega Jam",
+      "url": "https://pixelforgejam.org/",
+      "source": "hackclub",
+      "deadline": "2026-12-08T09:30:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Online",
+      "starts_at": "2026-11-28T09:30:00Z",
+      "ends_at": "2026-12-08T09:30:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "0n1IKx",
+        "name": "Pixel Forge Mega Jam",
+        "website": "https://pixelforgejam.org/",
+        "start": "2026-11-28T09:30:00.000Z",
+        "end": "2026-12-08T09:30:00.000Z",
+        "createdAt": "2026-09-21T13:51:25.282Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjAxMywicHVyIjoiYmxvYl9pZCJ9fQ==--85f630e16fcf6e727e12c4497de8b194a565a162/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/logo-mark.png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjAxNCwicHVyIjoiYmxvYl9pZCJ9fQ==--5fcd3288e4d2f3214ad4c63b47930509fe7a141c/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/PFMegaJam_Bg2.png",
+        "city": null,
+        "state": null,
+        "country": null,
+        "countryCode": null,
+        "latitude": null,
+        "longitude": null,
+        "virtual": true,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 12,
+    "score": 1.75,
+    "reasons": [
+      "Location preference: Online"
+    ],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Cosmo Hacks",
+      "url": "https://www.cosmohacks.com/",
+      "source": "hackclub",
+      "deadline": "2026-12-21T22:00:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Online",
+      "starts_at": "2026-12-18T21:00:00Z",
+      "ends_at": "2026-12-21T22:00:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "rjZIxn",
+        "name": "Cosmo Hacks",
+        "website": "https://www.cosmohacks.com/",
+        "start": "2026-12-18T21:00:00.000Z",
+        "end": "2026-12-21T22:00:00.000Z",
+        "createdAt": "2026-09-14T17:13:35.914Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NTk3MiwicHVyIjoiYmxvYl9pZCJ9fQ==--ed483c1f229c28f4445964795545d26a0857cc12/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/Screenshot%202026-09-04%20at%2010.15.54%E2%80%AFPM.png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NTk3MywicHVyIjoiYmxvYl9pZCJ9fQ==--4a7eabf0c29561d0bc0961a88fd1d0492afc9c9e/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/background.png",
+        "city": null,
+        "state": null,
+        "country": null,
+        "countryCode": null,
+        "latitude": null,
+        "longitude": null,
+        "virtual": true,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 13,
+    "score": 1.6948,
+    "reasons": [
+      "Deadline in 16 day(s)"
+    ],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "OCSEFhacks",
+      "url": "https://ocsefhacks.org/",
+      "source": "hackclub",
+      "deadline": "2026-11-15T18:00:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Westminster, California, United States",
+      "starts_at": "2026-11-14T08:30:00Z",
+      "ends_at": "2026-11-15T18:00:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "3KNIVA",
+        "name": "OCSEFhacks",
+        "website": "https://ocsefhacks.org/",
+        "start": "2026-11-14T08:30:00.000Z",
+        "end": "2026-11-15T18:00:00.000Z",
+        "createdAt": "2026-10-25T23:04:53.306Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjEzNywicHVyIjoiYmxvYl9pZCJ9fQ==--7e29f71aa53a9947c50673a3df7e336482d12998/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/LOGO%20Official%20for%20OCSEFhacks%20(1).png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjEzOCwicHVyIjoiYmxvYl9pZCJ9fQ==--22ff0dc21cc40dadb058b4b6f2e8b7924555547f/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGVnIiwicmVzaXplX3RvX2xpbWl0IjpbMTkyMCwxMDgwXX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--6696b5b4ae62e9942d9b6d207dd4968bc47aaf80/IMG_5478.jpeg",
+        "city": "Westminster",
+        "state": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "latitude": 33.754223572907,
+        "longitude": -118.007783749144,
+        "virtual": false,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 14,
+    "score": 1.6865,
+    "reasons": [
+      "Deadline in 16 day(s)"
+    ],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "ONHacks",
+      "url": "https://onhacks.ca",
+      "source": "hackclub",
+      "deadline": "2026-11-15T21:00:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Toronto, Ontario, Canada",
+      "starts_at": "2026-11-15T09:00:00Z",
+      "ends_at": "2026-11-15T21:00:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "3KNIgA",
+        "name": "ONHacks",
+        "website": "https://onhacks.ca",
+        "start": "2026-11-15T09:00:00.000Z",
+        "end": "2026-11-15T21:00:00.000Z",
+        "createdAt": "2026-09-04T02:41:04.098Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NTkzNCwicHVyIjoiYmxvYl9pZCJ9fQ==--216f68fa09812bb9b2d0bfb12c7aa34a9ccc47dd/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--58e36ae2e45952aecf9cf71735396abeb9897d87/790317934_18092386103212587_5854264481247785771_n.jpg",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NTkzNSwicHVyIjoiYmxvYl9pZCJ9fQ==--def54083e39c0dd9512f4318cb9351c032ca6082/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/00bfff.png",
+        "city": "Toronto",
+        "state": "Ontario",
+        "country": "Canada",
+        "countryCode": "CA",
+        "latitude": 43.65709700792,
+        "longitude": -79.395621409358,
+        "virtual": false,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 15,
+    "score": 1.2809,
+    "reasons": [
+      "Deadline in 22 day(s)"
+    ],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Teens Hack Houston",
+      "url": "https://tripleh.space/",
+      "source": "hackclub",
+      "deadline": "2026-11-21T23:00:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Houston, Texas, United States",
+      "starts_at": "2026-11-14T12:00:00Z",
+      "ends_at": "2026-11-21T23:00:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "rg2I4a",
+        "name": "Teens Hack Houston",
+        "website": "https://tripleh.space/",
+        "start": "2026-11-14T12:00:00.000Z",
+        "end": "2026-11-21T23:00:00.000Z",
+        "createdAt": "2026-10-20T23:01:31.797Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjExNSwicHVyIjoiYmxvYl9pZCJ9fQ==--fa87dc8fa665a2d0408184979216f74fae7cc1d0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/tripleh.png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjExNiwicHVyIjoiYmxvYl9pZCJ9fQ==--a6e1b61778d009950ca59f58f4ad0852506c296c/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--797f7952fb61db955e058b888e66d8ecb495e15b/POST-houston.jpg",
+        "city": "Houston",
+        "state": "Texas",
+        "country": "United States",
+        "countryCode": "US",
+        "latitude": 29.76568396658,
+        "longitude": -95.364674476611,
+        "virtual": false,
+        "hybrid": true,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 16,
+    "score": 1.2469,
+    "reasons": [
+      "Deadline in 23 day(s)"
+    ],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Snowglobe",
+      "url": "https://snowglobe.hackclub.com/",
+      "source": "hackclub",
+      "deadline": "2026-11-22T11:15:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "San Francisco, California, United States",
+      "starts_at": "2026-11-20T11:15:00Z",
+      "ends_at": "2026-11-22T11:15:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "0PvIqe",
+        "name": "Snowglobe",
+        "website": "https://snowglobe.hackclub.com/",
+        "start": "2026-11-20T11:15:00.000Z",
+        "end": "2026-11-22T11:15:00.000Z",
+        "createdAt": "2026-08-26T15:22:54.322Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NTg4MiwicHVyIjoiYmxvYl9pZCJ9fQ==--11f2e6cb570154a6655187c1c0ba39e5ef72c39a/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/logo-red%201%20(1).png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NTg4MywicHVyIjoiYmxvYl9pZCJ9fQ==--233f5cee9b658821172ce3096645163ee464b385/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/FAQ%20(4).png",
+        "city": "San Francisco",
+        "state": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "latitude": 37.7800771,
+        "longitude": -122.4201615,
+        "virtual": false,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": true,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 17,
+    "score": 0.75,
+    "reasons": [],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Mango Hacks",
+      "url": "https://mangohacks.ecily.org",
+      "source": "hackclub",
+      "deadline": "2026-12-06T04:30:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Pleasanton, California, United States",
+      "starts_at": "2026-12-05T16:00:00Z",
+      "ends_at": "2026-12-06T04:30:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "0xoIzo",
+        "name": "Mango Hacks",
+        "website": "https://mangohacks.ecily.org",
+        "start": "2026-12-05T16:00:00.000Z",
+        "end": "2026-12-06T04:30:00.000Z",
+        "createdAt": "2026-10-23T04:14:04.219Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjEyMCwicHVyIjoiYmxvYl9pZCJ9fQ==--e285132a768c332bb07bc50917b902cd9735d841/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/149f51da-4d7c-4525-8759-58e87237ca14.png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjEyMSwicHVyIjoiYmxvYl9pZCJ9fQ==--a2be898899eb3d71193460d19b2b778254a62eae/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/screenshot_22102026_211321.jpg",
+        "city": "Pleasanton",
+        "state": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "latitude": 37.686091371666,
+        "longitude": -121.893851068753,
+        "virtual": false,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 18,
+    "score": 0.75,
+    "reasons": [],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Hack Peel",
+      "url": "https://hackpeel.ca",
+      "source": "hackclub",
+      "deadline": "2026-12-13T19:00:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Mississauga, Ontario, Canada",
+      "starts_at": "2026-12-12T09:00:00Z",
+      "ends_at": "2026-12-13T19:00:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "0VqIzx",
+        "name": "Hack Peel",
+        "website": "https://hackpeel.ca",
+        "start": "2026-12-12T09:00:00.000Z",
+        "end": "2026-12-13T19:00:00.000Z",
+        "createdAt": "2026-10-09T01:18:26.574Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjA1OSwicHVyIjoiYmxvYl9pZCJ9fQ==--8099e12a36e77c0c821f216f054cd8f7c8e3692c/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/HackPeel%20is%20Back!%20(9).png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjA2MCwicHVyIjoiYmxvYl9pZCJ9fQ==--73a32fab43225b9ac6687e156881fdf5d59654d7/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/HackPeel%20Banner.png",
+        "city": "Mississauga",
+        "state": "Ontario",
+        "country": "Canada",
+        "countryCode": "CA",
+        "latitude": 43.562809188647,
+        "longitude": -79.647838072687,
+        "virtual": false,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 19,
+    "score": 0.75,
+    "reasons": [],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Sentinel Hacks",
+      "url": "https://www.sentinelhacks.tech/",
+      "source": "hackclub",
+      "deadline": "2027-01-23T08:00:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Sunnyvale, California, United States",
+      "starts_at": "2027-01-23T08:00:00Z",
+      "ends_at": "2027-01-23T08:00:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "r5KIJ4",
+        "name": "Sentinel Hacks",
+        "website": "https://www.sentinelhacks.tech/",
+        "start": "2027-01-23T08:00:00.000Z",
+        "end": "2027-01-23T08:00:00.000Z",
+        "createdAt": "2026-09-25T05:00:35.235Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjAyOCwicHVyIjoiYmxvYl9pZCJ9fQ==--8b9213292f77c4bc5261184f6a850d3855f1e06c/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/Copy%20of%20Be%20better%20than%20yesterday.png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjAyOSwicHVyIjoiYmxvYl9pZCJ9fQ==--4b17b3049a2ca45938ca968f6b36e1e6a36115eb/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/Copy%20of%20Be%20better%20than%20yesterday%20(1).png",
+        "city": "Sunnyvale",
+        "state": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "latitude": 37.391195063196,
+        "longitude": -122.037466849218,
+        "virtual": false,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 20,
+    "score": 0.75,
+    "reasons": [],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Beacon Hacks",
+      "url": "https://beaconhacks.com",
+      "source": "hackclub",
+      "deadline": "2027-01-31T07:00:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Belmont, California, United States",
+      "starts_at": "2027-01-30T16:30:00Z",
+      "ends_at": "2027-01-31T07:00:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "3J5INY",
+        "name": "Beacon Hacks",
+        "website": "https://beaconhacks.com",
+        "start": "2027-01-30T16:30:00.000Z",
+        "end": "2027-01-31T07:00:00.000Z",
+        "createdAt": "2026-10-27T00:02:40.632Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjE0MiwicHVyIjoiYmxvYl9pZCJ9fQ==--daf4dd094a41c0385e5575c4e77265dee9dee487/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/beacon-hacks-icon-512.png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjE1MCwicHVyIjoiYmxvYl9pZCJ9fQ==--f0e5ddc60208d62302de3bb27c2f13dcf33e9dde/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/beacon-hacks-banner-1920x1080.png",
+        "city": "Belmont",
+        "state": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "latitude": 37.508536,
+        "longitude": -122.291951,
+        "virtual": false,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 21,
+    "score": 0.75,
+    "reasons": [],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "PHANTOM",
+      "url": "https://phantom.hackclub.com",
+      "source": "hackclub",
+      "deadline": "2027-02-14T22:00:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Philadelphia, Pennsylvania, United States",
+      "starts_at": "2027-02-12T22:00:00Z",
+      "ends_at": "2027-02-14T22:00:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "r2RIVj",
+        "name": "PHANTOM",
+        "website": "https://phantom.hackclub.com",
+        "start": "2027-02-12T22:00:00.000Z",
+        "end": "2027-02-14T22:00:00.000Z",
+        "createdAt": "2026-09-13T18:06:25.718Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NTk2NCwicHVyIjoiYmxvYl9pZCJ9fQ==--b9deef7827a1da8dafe112baca688f7440b38365/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/PHANTOM@2x%20(1).png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NTk2NSwicHVyIjoiYmxvYl9pZCJ9fQ==--92abba3383dcdd2fb08648bd2c2f8ca2739ac50e/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/bg.png",
+        "city": "Philadelphia",
+        "state": "Pennsylvania",
+        "country": "United States",
+        "countryCode": "US",
+        "latitude": 39.950796,
+        "longitude": -75.160124,
+        "virtual": false,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": true,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 22,
+    "score": 0.75,
+    "reasons": [],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Pakistan Hardware Hack 27",
+      "url": "https://teenhacks.org/",
+      "source": "hackclub",
+      "deadline": "2027-02-28T20:00:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "Lahore, Punjab, Pakistan",
+      "starts_at": "2027-02-27T08:00:00Z",
+      "ends_at": "2027-02-28T20:00:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "3aDIGP",
+        "name": "Pakistan Hardware Hack 27",
+        "website": "https://teenhacks.org/",
+        "start": "2027-02-27T08:00:00.000Z",
+        "end": "2027-02-28T20:00:00.000Z",
+        "createdAt": "2026-10-24T11:35:07.143Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjEzMSwicHVyIjoiYmxvYl9pZCJ9fQ==--24c1beb2a29ef2301200a28a9b92b816cbf2b84e/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/PHH%20(1).png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjEzMiwicHVyIjoiYmxvYl9pZCJ9fQ==--d9af9d080337c1876b9b8941375fee0fa784e655/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/BG%20PHH27.png",
+        "city": "Lahore",
+        "state": "Punjab",
+        "country": "Pakistan",
+        "countryCode": "PK",
+        "latitude": 31.45088,
+        "longitude": 74.31629,
+        "virtual": false,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": true
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  },
+  {
+    "rank": 23,
+    "score": 0.75,
+    "reasons": [],
+    "unknowns": [
+      "Prize not listed",
+      "Entry fee unknown (feeds list no cost data)",
+      "Eligibility restrictions unknown (not documented in feeds)"
+    ],
+    "event": {
+      "name": "Telos Hacks",
+      "url": "https://hack.telost.org",
+      "source": "hackclub",
+      "deadline": "2027-04-18T20:00:00Z",
+      "prize_amount": null,
+      "themes": [],
+      "location": "San Francisco, California, United States",
+      "starts_at": "2027-04-17T16:00:00Z",
+      "ends_at": "2027-04-18T20:00:00Z",
+      "raw_submission_period": null,
+      "raw": {
+        "id": "3X9ILN",
+        "name": "Telos Hacks",
+        "website": "https://hack.telost.org",
+        "start": "2027-04-17T16:00:00.000Z",
+        "end": "2027-04-18T20:00:00.000Z",
+        "createdAt": "2026-09-23T04:20:27.405Z",
+        "logo": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjAxOSwicHVyIjoiYmxvYl9pZCJ9fQ==--8c3de0e25aa76503f8e671e5d4c548bedc6d8b6f/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxMjgsMTI4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--aed3fb345df101cd22ac6ef68ee4e4dbe8543f96/1-telos-logo.png",
+        "banner": "https://dash.hackathons.hackclub.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NjAyMCwicHVyIjoiYmxvYl9pZCJ9fQ==--9b2fb8bac7fe53a6dc8985be781c0608efee4f99/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOlsxOTIwLDEwODBdfSwicHVyIjoidmFyaWF0aW9uIn19--0cb308658042f2d6b36d86bf03f4df0c63838d0b/2-telos-banner.png",
+        "city": "San Francisco",
+        "state": "California",
+        "country": "United States",
+        "countryCode": "US",
+        "latitude": 37.791609,
+        "longitude": -122.399399,
+        "virtual": false,
+        "hybrid": false,
+        "mlhAssociated": false,
+        "hack_club_event": false,
+        "apac": false
+      },
+      "sources": [
+        "hackclub"
+      ],
+      "conflicts": {}
+    }
+  }
+]

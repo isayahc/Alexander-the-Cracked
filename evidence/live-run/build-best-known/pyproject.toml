@@ -1,0 +1,8 @@
+[project]
+name = "payflow-fee-assistant"
+version = "0.1.0"
+description = "Transparent fee, tier, and order-note triage for PayPal sellers"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["."]

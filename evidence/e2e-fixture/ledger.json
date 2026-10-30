@@ -1,0 +1,61 @@
+{
+  "event_name": "PayPal AI Hackathon",
+  "event_url": "https://paypalaihackathon.devpost.com/",
+  "sources": [
+    "devpost"
+  ],
+  "entries": [
+    {
+      "requirement": "Submissions close by 2026-11-12T00:00:00+00:00",
+      "category": "deadline",
+      "status": "confirmed",
+      "source_url": "https://paypalaihackathon.devpost.com/",
+      "source": "devpost",
+      "detail": "Feed timestamp carries no timezone and was pinned to UTC; verify the official deadline timezone on the event page."
+    },
+    {
+      "requirement": "Advertised prize: $67,500",
+      "category": "prize",
+      "status": "confirmed",
+      "source_url": "https://paypalaihackathon.devpost.com/",
+      "source": "devpost",
+      "detail": null
+    },
+    {
+      "requirement": "Participation format: online/virtual",
+      "category": "format",
+      "status": "confirmed",
+      "source_url": "https://paypalaihackathon.devpost.com/",
+      "source": "devpost",
+      "detail": null
+    },
+    {
+      "requirement": "Themes: Low/No Code, Machine Learning/AI, Web",
+      "category": "theme",
+      "status": "confirmed",
+      "source_url": "https://paypalaihackathon.devpost.com/",
+      "source": "devpost",
+      "detail": null
+    },
+    {
+      "requirement": "Eligibility restrictions",
+      "category": "eligibility",
+      "status": "unknown",
+      "source_url": null,
+      "source": null,
+      "detail": null
+    },
+    {
+      "requirement": "Judging criteria / rubric",
+      "category": "rubric",
+      "status": "unknown",
+      "source_url": null,
+      "source": null,
+      "detail": null
+    }
+  ],
+  "open_questions": [
+    "Eligibility restrictions are not documented in the feeds — verify who may enter on the official event page before building.",
+    "Judging criteria are not documented in the feeds — only publicly documented criteria may be used; capture them from the event page before building."
+  ]
+}

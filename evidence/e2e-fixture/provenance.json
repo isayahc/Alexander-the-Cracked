@@ -1,0 +1,160 @@
+{
+  "run": {
+    "script": "evidence_e2e_run.py",
+    "started_utc": "2026-10-30T22:07:30Z",
+    "epic": "https://github.com/isayahc/Alexander-the-Cracked/issues/15",
+    "unit": "(d) end-to-end traceability run \u2014 fixture leg",
+    "fixture_points": [
+      "feed HTTP responses (committed fixtures served via ResponseCache)",
+      "builder (ScriptedBuilder double; evaluation still runs real pytest)"
+    ],
+    "real_components": [
+      "ResponseCache",
+      "feed parsers (parse_devpost, parse_hackclub)",
+      "canonical dedupe",
+      "ranking (score + sort)",
+      "requirement ledger",
+      "brief planning (plan_run/build_brief)",
+      "iteration loop",
+      "independent evaluation (run_tests subprocess)"
+    ]
+  },
+  "discovery": {
+    "sources": [
+      {
+        "name": "devpost",
+        "url": "https://devpost.com/api/hackathons",
+        "fixture_file": "tests/fixtures/devpost_hackathons.json",
+        "parser": "alexander.discovery.devpost.parse_devpost",
+        "raw_listings": 9,
+        "cache_key_sha256": "1960332d2712fbaf62ce70512d9cd477d17b2a5a08db813811b3a4387dcbd959",
+        "fixture_point": "feed HTTP response replaced by committed fixture"
+      },
+      {
+        "name": "hackclub",
+        "url": "https://hackathons.hackclub.com/api/events/upcoming",
+        "fixture_file": "tests/fixtures/hackclub_upcoming.json",
+        "parser": "alexander.discovery.hackclub.parse_hackclub",
+        "raw_listings": 8,
+        "cache_key_sha256": "8c0f42b8e7af5ca37937eab070327288e1aad7ce13f4a344dfd29ed56b647184",
+        "fixture_point": "feed HTTP response replaced by committed fixture"
+      }
+    ],
+    "raw_listings_per_source": {
+      "devpost": 9,
+      "hackclub": 8
+    },
+    "canonical_events_after_dedupe": 17,
+    "pass1_canonical_events": 17,
+    "pass2_canonical_events": 17,
+    "identity_stable_across_passes": true,
+    "traced_event_slug": "paypal-ai-hackathon-360e79c1",
+    "traced_event_sources": [
+      "devpost"
+    ]
+  },
+  "ranking": {
+    "profile": "profile.yaml (repo root, documented defaults)",
+    "ranked_upcoming": 16,
+    "top": {
+      "rank": 1,
+      "score": 5.1948,
+      "reasons": [
+        "Matches interests: ai, web",
+        "Deadline in 12 day(s)",
+        "Prize $67,500",
+        "Location preference: Online"
+      ],
+      "unknowns": [
+        "Entry fee unknown (feeds list no cost data)",
+        "Eligibility restrictions unknown (not documented in feeds)"
+      ],
+      "event": {
+        "name": "PayPal AI Hackathon",
+        "url": "https://paypalaihackathon.devpost.com/",
+        "source": "devpost",
+        "deadline": "2026-11-12T00:00:00Z",
+        "prize_amount": "$67,500",
+        "themes": [
+          "Low/No Code",
+          "Machine Learning/AI",
+          "Web"
+        ],
+        "location": "Online",
+        "starts_at": "2026-10-01T00:00:00Z",
+        "ends_at": "2026-11-12T00:00:00Z",
+        "raw_submission_period": "Oct 01 - Nov 12, 2026",
+        "raw": {
+          "id": 31302,
+          "title": "PayPal AI Hackathon",
+          "displayed_location": {
+            "icon": "globe",
+            "location": "Online"
+          },
+          "open_state": "open",
+          "thumbnail_url": "//d112y698adiu2z.cloudfront.net/photos/production/challenge_thumbnails/005/288/985/datas/medium_square.png",
+          "analytics_identifier": "PayPal AI Hackathon (31302)",
+          "url": "https://paypalaihackathon.devpost.com/",
+          "time_left_to_submission": "13 days left",
+          "submission_period_dates": "Oct 01 - Nov 12, 2026",
+          "themes": [
+            {
+              "id": 17,
+              "name": "Low/No Code"
+            },
+            {
+              "id": 6,
+              "name": "Machine Learning/AI"
+            },
+            {
+              "id": 25,
+              "name": "Web"
+            }
+          ],
+          "prize_amount": "$<span data-currency-value>67,500</span>",
+          "prizes_counts": {
+            "cash": 14,
+            "other": 3
+          },
+          "registrations_count": 24725,
+          "featured": false,
+          "organization_name": "PayPal",
+          "winners_announced": false,
+          "submission_gallery_url": "https://paypalaihackathon.devpost.com/project-gallery",
+          "start_a_submission_url": "https://paypalaihackathon.devpost.com/challenges/start_a_submission",
+          "invite_only": false,
+          "eligibility_requirement_invite_only_description": null,
+          "managed_by_devpost_badge": true
+        },
+        "sources": [
+          "devpost"
+        ],
+        "conflicts": {}
+      }
+    }
+  },
+  "ledger": {
+    "confirmed": 4,
+    "unknown_entries": 2,
+    "open_questions": 2,
+    "files": [
+      "ledger.json",
+      "ledger.md"
+    ]
+  },
+  "brief": "brief.json",
+  "iteration_full": {
+    "stop_reason": "pass_condition",
+    "best_iteration": 2,
+    "iterations": 2,
+    "total_attempts": 2,
+    "manifest": "/home/user/work/Alexander-the-Cracked/evidence/e2e-fixture/builds/paypal-ai-hackathon-360e79c1-iterations.json"
+  },
+  "iteration_rollback": {
+    "stop_reason": "pass_condition",
+    "best_iteration": 3,
+    "iterations": 3,
+    "restored_best": true,
+    "manifest": "/home/user/work/Alexander-the-Cracked/evidence/e2e-fixture/builds/paypal-ai-hackathon-360e79c1-rollback-iterations.json"
+  }
+}
