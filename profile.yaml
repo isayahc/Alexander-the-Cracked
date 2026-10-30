@@ -1,0 +1,30 @@
+# Alexander interest profile
+#
+# This file is the example/default profile. `alexander rank` looks for it at
+# the repo root first, then at ~/.config/alexander/profile.yaml. Edit this
+# copy or copy it to the XDG location — every field is optional.
+
+interests:
+  # Plain keywords are worth the default weight of 1.0
+  - ai
+  - web
+  # Give a keyword more influence with an explicit weight
+  - keyword: climate
+    weight: 2.0
+
+# Prizes at or above this amount score the full prize component
+preferred_prize_min: 10000
+
+# Deadlines within this many days score highest (closer = higher)
+deadline_window_days: 30
+
+# Events at these locations get the location boost
+preferred_locations:
+  - Online
+
+# Component weights (documented defaults; override to taste)
+# weights:
+#   theme: 3.0
+#   deadline: 2.0
+#   prize: 1.5
+#   location: 1.0
