@@ -1,6 +1,7 @@
 """Tests for the `alexander swarm` command (no network, no live agents)."""
 
 import asyncio
+import hashlib
 import time
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
@@ -100,6 +101,11 @@ def make_fake_builder(monkeypatch: pytest.MonkeyPatch) -> FakeSwarmBuilder:
     builder = FakeSwarmBuilder()
     monkeypatch.setattr("alexander.cli.create_builder", lambda backend=None: builder)
     return builder
+
+
+def url_digest(url: str) -> str:
+    """The 8-hex URL digest event_slug appends (see pipeline.event_slug)."""
+    return hashlib.sha256(url.encode()).hexdigest()[:8]
 
 
 def invoke_swarm(*args: str) -> object:
@@ -225,8 +231,10 @@ def test_swarm_exits_nonzero_when_a_build_fails(
     registry = ClaimRegistry(registry_path)
     statuses = {row.event_slug: row.status for row in registry.results()}
     assert statuses == {
-        "event-1": BuildStatus.BUDGET_EXHAUSTED.value,
-        "event-2": BuildStatus.SUCCESS.value,
+        f"event-1-{url_digest('https://event-1.example.com')}": (
+            BuildStatus.BUDGET_EXHAUSTED.value
+        ),
+        f"event-2-{url_digest('https://event-2.example.com')}": BuildStatus.SUCCESS.value,
     }
 
 

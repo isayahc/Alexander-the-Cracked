@@ -5,6 +5,7 @@ event selection) so the CLI command stays a thin I/O shell and every rule is
 unit-testable without network or agents.
 """
 
+import hashlib
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -18,9 +19,12 @@ _SLUG_MAX_LEN = 60
 
 
 def event_slug(event: HackathonEvent) -> str:
-    """Filesystem-safe, deterministic directory name for one event."""
+    """Filesystem-safe, deterministic, collision-resistant name for one event."""
     slug = re.sub(r"[^a-z0-9]+", "-", event.name.lower()).strip("-")
-    return (slug[:_SLUG_MAX_LEN].strip("-")) or "event"
+    base = (slug[:_SLUG_MAX_LEN].strip("-")) or "event"
+    # Distinct events can share a name (dedupe() keys on URL, not name); the
+    # URL digest keeps their build directories and claim rows apart.
+    return f"{base}-{hashlib.sha256(event.url.encode()).hexdigest()[:8]}"
 
 
 def build_brief(event: HackathonEvent) -> HackathonBrief:

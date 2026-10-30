@@ -1,5 +1,6 @@
 """Tests for the `alexander run` command (no network, no live agents)."""
 
+import hashlib
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
@@ -70,6 +71,11 @@ def stub_discover(events: list[HackathonEvent]) -> object:
     return fake_discover
 
 
+def url_digest(url: str) -> str:
+    """The 8-hex URL digest event_slug appends (see pipeline.event_slug)."""
+    return hashlib.sha256(url.encode()).hexdigest()[:8]
+
+
 def ranked_events() -> list[HackathonEvent]:
     """Two events: 'AI Hackathon' ranks first, 'Web Jam' second."""
     now = datetime.now(UTC)
@@ -118,7 +124,7 @@ def test_run_builds_the_top_event(
     assert len(fake_builder.calls) == 1
     brief, out_dir, budgets = fake_builder.calls[0]
     assert brief.event_name == "AI Hackathon"
-    assert Path("builds") / "ai-hackathon" == out_dir
+    assert Path("builds") / f"ai-hackathon-{url_digest('https://ai.example.com')}" == out_dir
     # Budget defaults come from the builder: 5 attempts / 30 minutes.
     assert budgets.max_attempts == 5
     assert budgets.wall_clock == timedelta(minutes=30)
@@ -138,7 +144,7 @@ def test_run_respects_pick_top_and_budget_flags(
     assert len(fake_builder.calls) == 1
     brief, out_dir, budgets = fake_builder.calls[0]
     assert brief.event_name == "Web Jam"
-    assert Path("builds") / "web-jam" == out_dir
+    assert Path("builds") / f"web-jam-{url_digest('https://web.example.com')}" == out_dir
     assert budgets.max_attempts == 1
     assert budgets.wall_clock == timedelta(minutes=10)
 
