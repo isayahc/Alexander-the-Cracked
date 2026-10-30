@@ -1,6 +1,9 @@
 """Tests for the discovery orchestration and CLI wiring (no network)."""
 
 import json
+import subprocess
+import sys
+import threading
 from pathlib import Path
 
 import httpx
@@ -15,6 +18,7 @@ from alexander.discovery.hackclub import HACKCLUB_API_URL, parse_hackclub
 from alexander.discovery.models import HackathonEvent
 
 FIXTURES = Path(__file__).parent / "fixtures"
+WORKER_HELPER = Path(__file__).parent / "helpers" / "singleflight_worker.py"
 
 
 @pytest.fixture(name="feed_payloads")
@@ -84,6 +88,68 @@ def test_discover_events_survives_corrupt_cache_file(
     events = discover_events(cache_dir=tmp_path)
 
     assert {event.source for event in events} == {"devpost", "hackclub"}
+
+
+def test_single_flight_across_processes(tmp_path: Path) -> None:
+    """N subprocesses sharing one cache dir cause exactly one real fetch."""
+    payload_file = tmp_path / "payload.json"
+    payload_file.write_text(json.dumps({"hackathons": []}))
+    counter_file = tmp_path / "counter.log"
+    cache_dir = tmp_path / "cache"
+    url = "https://example.com/feed"
+    workers = 5
+
+    procs = [
+        subprocess.Popen(
+            [
+                sys.executable,
+                str(WORKER_HELPER),
+                str(cache_dir),
+                str(counter_file),
+                url,
+                str(payload_file),
+            ]
+        )
+        for _ in range(workers)
+    ]
+    for proc in procs:
+        assert proc.wait(timeout=120) == 0
+
+    lines = counter_file.read_text().splitlines()
+    assert len([line for line in lines if line.startswith("fetch ")]) == 1
+    assert len([line for line in lines if line.startswith("parsed ")]) == workers
+
+
+def test_single_flight_across_threads(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """N threads in one process contending on the same key fetch exactly once."""
+    fetches: list[str] = []
+
+    def fake_http_get_json(url: str) -> object:
+        fetches.append(url)
+        return {"hackathons": []}
+
+    monkeypatch.setattr(discover, "http_get_json", fake_http_get_json)
+
+    cache = ResponseCache(cache_dir=tmp_path)
+    url = "https://example.com/feed"
+    workers = 4
+    start_barrier = threading.Barrier(workers)
+    results: list[object] = []
+
+    def runner() -> None:
+        start_barrier.wait()
+        results.append(discover._fetch_cached_source(url, lambda parsed: parsed, cache))
+
+    threads = [threading.Thread(target=runner) for _ in range(workers)]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join(timeout=60)
+
+    assert len(results) == workers
+    assert fetches == [url]
 
 
 def test_discover_events_survives_one_feed_down(

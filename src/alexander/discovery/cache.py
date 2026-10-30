@@ -10,7 +10,14 @@ import math
 import os
 import tempfile
 import time
+from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path
+
+try:
+    import fcntl
+except ImportError:  # pragma: no cover - non-POSIX; degrade to unlocked fetch
+    fcntl = None  # type: ignore[assignment]
 
 DEFAULT_TTL_SECONDS = 3600
 DEFAULT_CACHE_DIR = Path.home() / ".cache" / "alexander"
@@ -30,6 +37,26 @@ class ResponseCache:
     def _path_for(self, key: str) -> Path:
         digest = hashlib.sha256(key.encode()).hexdigest()
         return self.cache_dir / f"{digest}.json"
+
+    @contextmanager
+    def locked(self, key: str) -> Iterator[None]:
+        """Hold the per-key interprocess advisory lock for the duration.
+
+        Backed by fcntl.flock on a lock file next to the entry, so separate
+        processes (not just threads) serialize. Where fcntl is unavailable,
+        degrade to unlocked: the cache stays correct, fetches may duplicate.
+        """
+        if fcntl is None:  # pragma: no cover - non-POSIX only
+            yield
+            return
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+        lock_path = self._path_for(key).with_suffix(".lock")
+        with open(lock_path, "w") as lock_file:
+            fcntl.flock(lock_file, fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(lock_file, fcntl.LOCK_UN)
 
     def load(self, key: str) -> object | None:
         """Return the cached payload for ``key``, or None if missing/expired/corrupt.
