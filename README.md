@@ -209,6 +209,35 @@ result = asyncio.run(
 print(result.status, result.artifact_path, result.test_summary)
 ```
 
+### `alexander iterate`
+
+```bash
+alexander iterate --brief brief.json --out out/pomodoro
+alexander iterate --brief brief.json --out out/pomodoro \
+  --max-iterations 3 --max-attempts 5 --minutes 60
+```
+
+The bounded build-evaluate-iterate loop. Each iteration is one budgeted build
+followed by an **independent evaluation** — the test suite is re-run and the
+required artifacts (SPEC.md, README.md) are checked on disk; an evaluation is
+never taken from the agent's own report, so results cannot be fabricated.
+Every evaluation is recorded with its per-check evidence in
+`<out>-iterations.json`, a reloadable manifest that also totals the cost
+(attempts and wall-clock seconds per round).
+
+The loop stops only on explicit conditions, reported as `stopped: <reason>`:
+
+- `pass_condition` — a round's evaluation fully passed; its project is
+  snapshotted to `<out>-best-known`.
+- `budget_iterations` — the `--max-iterations` budget ran out.
+- `budget_wall_clock` — the `--minutes` budget ran out before a round started.
+- `builder_error` — the backend itself failed; not retried.
+
+Prior passing behavior is preserved across iterations: the best-known
+snapshot holds the latest round whose test suite passed, and a later round
+that breaks those tests is rolled back to it before the next round starts.
+The command exits 1 unless it stopped on the pass condition.
+
 ## Claim registry
 
 The swarm's only shared state is a SQLite claim registry (stdlib `sqlite3`,

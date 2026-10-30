@@ -17,6 +17,12 @@ from alexander.builder import (
     create_builder,
 )
 from alexander.discovery import discover_events
+from alexander.iteration import (
+    IterationBudgets,
+    StopReason,
+    manifest_path_for,
+    run_iteration_loop,
+)
 from alexander.ledger import build_ledger, render_ledger_markdown
 from alexander.orchestrator import plan_run
 from alexander.ranking import (
@@ -72,8 +78,7 @@ def rank(no_cache: bool, profile_path: Path | None, as_json: bool) -> None:
         click.echo("No upcoming events to rank. Run `alexander discover` to check the feeds.")
         return
     click.echo(
-        f"{'Rank':>4}  {'Score':>5}  {'Name':<30}  {'Deadline':<19}  "
-        f"{'Prize':<12}  Top reason"
+        f"{'Rank':>4}  {'Score':>5}  {'Name':<30}  {'Deadline':<19}  {'Prize':<12}  Top reason"
     )
     for position, entry in enumerate(ranked, start=1):
         deadline = entry.event.deadline.strftime("%Y-%m-%d %H:%M") if entry.event.deadline else "—"
@@ -200,6 +205,70 @@ def build(brief_file: Path, out_dir: Path, max_attempts: int, minutes: float) ->
     if result.error:
         click.echo(f"error: {result.error}", err=True)
     if result.status is not BuildStatus.SUCCESS:
+        raise SystemExit(1)
+
+
+@cli.command()
+@click.option("--brief", "brief_file", required=True, type=click.Path(exists=True, path_type=Path))
+@click.option("--out", "out_dir", required=True, type=click.Path(path_type=Path))
+@click.option("--max-iterations", default=2, show_default=True, type=click.IntRange(min=1))
+@click.option("--max-attempts", default=5, show_default=True, type=click.IntRange(min=1))
+@click.option("--minutes", default=60.0, show_default=True, type=click.FloatRange(min=0))
+@click.option("--backend", default=None, help="Build backend override (obvious or claude).")
+def iterate(
+    brief_file: Path,
+    out_dir: Path,
+    max_iterations: int,
+    max_attempts: int,
+    minutes: float,
+    backend: str | None,
+) -> None:
+    """Build, evaluate, and iterate within explicit budgets.
+
+    Each iteration is one bounded build followed by an independent evaluation
+    (test suite plus required artifacts). Stops on the pass condition or the
+    iteration/wall-clock budget; the best-known passing result is snapshotted
+    to <out>-best-known and every evaluation is recorded in
+    <out>-iterations.json.
+    """
+    try:
+        brief = HackathonBrief.model_validate_json(brief_file.read_text(encoding="utf-8"))
+    except ValidationError as exc:
+        click.echo(f"Brief file {brief_file} is not a valid brief: {exc}", err=True)
+        raise SystemExit(1) from exc
+    try:
+        budgets = IterationBudgets(
+            max_iterations=max_iterations,
+            wall_clock=timedelta(minutes=minutes),
+            build=BuildBudgets(max_attempts=max_attempts, wall_clock=timedelta(minutes=minutes)),
+        )
+        builder = create_builder(backend)
+        manifest = asyncio.run(run_iteration_loop(builder, brief, out_dir, budgets))
+    except MissingApiKeyError as exc:
+        click.echo(str(exc), err=True)
+        raise SystemExit(1) from exc
+    except ValueError as exc:
+        click.echo(f"Invalid iteration budgets: {exc}", err=True)
+        raise SystemExit(1) from exc
+
+    for record in manifest.iterations:
+        verdict = "passed" if record.passed else "failed"
+        cost = f"attempts={record.attempts_used}, {record.duration_s:.1f}s"
+        click.echo(f"iteration {record.iteration}: {verdict} ({cost})")
+        if record.test_summary:
+            click.echo(f"  tests: {record.test_summary}")
+        if record.error:
+            click.echo(f"  error: {record.error}", err=True)
+        if record.restored_best:
+            click.echo("  best-known result restored over this failed iteration")
+    click.echo(f"stopped: {manifest.stop_reason.value}")
+    if manifest.best_known_dir:
+        click.echo(
+            f"best-known result: {manifest.best_known_dir} (iteration {manifest.best_iteration})"
+        )
+    click.echo(f"total cost: {manifest.total_attempts} attempts, {manifest.total_duration_s:.1f}s")
+    click.echo(f"manifest: {manifest_path_for(out_dir)}")
+    if manifest.stop_reason is not StopReason.PASS_CONDITION:
         raise SystemExit(1)
 
 
@@ -408,9 +477,7 @@ def swarm(
         f"Swarm plan ({instances} workers):"
     )
     for position, plan in enumerate(plans, start=1):
-        click.echo(
-            f"  {position}. {plan.event.name} [{plan.event.source}] -> {plan.out_dir}"
-        )
+        click.echo(f"  {position}. {plan.event.name} [{plan.event.source}] -> {plan.out_dir}")
 
     if dry_run:
         _print_registry_state(registry_path)
