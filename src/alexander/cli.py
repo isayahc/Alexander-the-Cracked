@@ -3,6 +3,7 @@
 import asyncio
 import json
 from datetime import timedelta
+from functools import partial
 from pathlib import Path
 
 import click
@@ -24,6 +25,7 @@ from alexander.ranking import (
     rank_events,
     resolve_profile_path,
 )
+from alexander.swarm import DEFAULT_REGISTRY_PATH, ClaimRegistry, SwarmOutcome, run_swarm
 
 
 @click.group()
@@ -230,5 +232,162 @@ def run(
             click.echo(f"error: {result.error}", err=True)
         if result.status is not BuildStatus.SUCCESS:
             failed = True
+    if failed:
+        raise SystemExit(1)
+
+
+def _print_outcome(outcome: SwarmOutcome) -> None:
+    """Echo one finished swarm build as its worker completes it."""
+    result = outcome.result
+    click.echo(f"[w{outcome.worker_id}] build {result.status.value}: {result.artifact_path}")
+    if result.test_summary:
+        click.echo(f"[w{outcome.worker_id}] tests: {result.test_summary}")
+    if result.error:
+        click.echo(f"[w{outcome.worker_id}] error: {result.error}", err=True)
+
+
+def _print_registry_state(registry_path: Path) -> None:
+    """Summarize the shared registry without creating it (dry runs read only)."""
+    if not registry_path.exists():
+        click.echo("Registry: no claims recorded yet.")
+        return
+    snapshot = ClaimRegistry(registry_path)
+    try:
+        rows = snapshot.results()
+    finally:
+        snapshot.close()
+    pending = [row.event_slug for row in rows if row.status == "claimed"]
+    click.echo(f"Registry: {len(rows)} claim(s) on record, {len(pending)} still pending.")
+
+
+@cli.command()
+@click.option("--no-cache", is_flag=True, default=False, help="Bypass the on-disk response cache.")
+@click.option(
+    "--profile",
+    "profile_path",
+    type=click.Path(path_type=Path),
+    default=None,
+    help="Path to a profile YAML file (default: profile.yaml or ~/.config/alexander/profile.yaml).",
+)
+@click.option(
+    "--instances",
+    default=3,
+    show_default=True,
+    type=click.IntRange(min=1),
+    help="Number of concurrent swarm workers.",
+)
+@click.option(
+    "--events",
+    "event_count",
+    default=None,
+    type=click.IntRange(min=1),
+    help="Plan the top M ranked events (default: one per worker).",
+)
+@click.option(
+    "--out",
+    "out_root",
+    type=click.Path(path_type=Path),
+    default=Path("builds"),
+    show_default=True,
+    help="Root directory for generated projects.",
+)
+@click.option(
+    "--registry",
+    "registry_path",
+    type=click.Path(path_type=Path),
+    default=DEFAULT_REGISTRY_PATH,
+    show_default=True,
+    help="Path to the shared SQLite claim registry.",
+)
+@click.option(
+    "--dry-run",
+    is_flag=True,
+    default=False,
+    help="Print the plan and registry state; claim and build nothing.",
+)
+@click.option(
+    "--backend",
+    default=None,
+    help="Build backend override (default: ALEXANDER_BUILD_BACKEND or 'obvious').",
+)
+@click.option("--max-attempts", default=5, show_default=True, type=click.IntRange(min=1))
+@click.option("--minutes", default=30.0, show_default=True, type=click.FloatRange(min=0))
+def swarm(
+    no_cache: bool,
+    profile_path: Path | None,
+    instances: int,
+    event_count: int | None,
+    out_root: Path,
+    registry_path: Path,
+    dry_run: bool,
+    backend: str | None,
+    max_attempts: int,
+    minutes: float,
+) -> None:
+    """Discover and rank once, then build the top events concurrently."""
+    profile = _load_profile(profile_path)
+    events = discover_events(use_cache=not no_cache)
+    ranked = rank_events(events, profile)
+    if not ranked:
+        click.echo("No upcoming events to build for. Check back once the feeds refresh.")
+        return
+    # One event per worker keeps the default swarm meaningful (--instances 3
+    # plans 3 events) while --events sizes the pool independently.
+    pool_size = event_count if event_count is not None else instances
+    plans = plan_run(ranked, out_root, top=pool_size)
+
+    click.echo(
+        f"Discovered {len(events)} event(s), {len(ranked)} upcoming. "
+        f"Swarm plan ({instances} workers):"
+    )
+    for position, plan in enumerate(plans, start=1):
+        click.echo(
+            f"  {position}. {plan.event.name} [{plan.event.source}] -> {plan.out_dir}"
+        )
+
+    if dry_run:
+        _print_registry_state(registry_path)
+        click.echo("Dry run: nothing claimed, nothing built.")
+        return
+
+    budgets_factory = partial(
+        BuildBudgets, max_attempts=max_attempts, wall_clock=timedelta(minutes=minutes)
+    )
+    try:
+        budgets_factory()  # validate the budget flags before any worker starts
+        builder = create_builder(backend)
+        registry = ClaimRegistry(registry_path)
+    except MissingApiKeyError as exc:
+        click.echo(str(exc), err=True)
+        raise SystemExit(1) from exc
+    except ValueError as exc:
+        click.echo(f"Invalid build configuration: {exc}", err=True)
+        raise SystemExit(1) from exc
+
+    try:
+        outcomes = asyncio.run(
+            run_swarm(
+                plans,
+                registry=registry,
+                builder=builder,
+                instances=instances,
+                budgets_factory=budgets_factory,
+                on_result=_print_outcome,
+            )
+        )
+        pending = registry.pending()
+    except MissingApiKeyError as exc:
+        click.echo(str(exc), err=True)
+        raise SystemExit(1) from exc
+    finally:
+        registry.close()
+
+    failed = [outcome for outcome in outcomes if outcome.result.status is not BuildStatus.SUCCESS]
+    click.echo(f"Swarm complete: {len(outcomes) - len(failed)} succeeded, {len(failed)} failed.")
+    if pending:
+        click.echo(
+            f"Warning: {len(pending)} pending claim(s) belong to other or unfinished runs: "
+            f"{', '.join(pending)}"
+        )
     if failed:
         raise SystemExit(1)
