@@ -18,6 +18,9 @@ venv/
 # Discovery response cache
 .cache/
 
+# `alexander run` build output
+builds/
+
 # Environment / secrets
 .env
 
