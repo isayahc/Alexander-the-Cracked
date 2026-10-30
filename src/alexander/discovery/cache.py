@@ -6,6 +6,7 @@ is cached verbatim per URL key; parsing always happens on read.
 
 import hashlib
 import json
+import math
 import os
 import tempfile
 import time
@@ -31,12 +32,25 @@ class ResponseCache:
         return self.cache_dir / f"{digest}.json"
 
     def load(self, key: str) -> object | None:
-        """Return the cached payload for ``key``, or None if missing/expired/corrupt."""
+        """Return the cached payload for ``key``, or None if missing/expired/corrupt.
+
+        The on-disk entry is untrusted shared state: any payload that does not
+        parse into a well-shaped entry is treated as a miss, never an error.
+        """
         try:
             entry = json.loads(self._path_for(key).read_text())
-        except (OSError, json.JSONDecodeError, ValueError):
+        except (OSError, ValueError):
+            # JSONDecodeError is a ValueError; OSError covers unreadable files.
+            return None
+        if not isinstance(entry, dict):
             return None
         fetched_at = entry.get("fetched_at", 0)
+        if isinstance(fetched_at, bool) or not isinstance(fetched_at, (int, float)):
+            return None
+        # NaN survives json.loads and makes every comparison false, which would
+        # serve stale data forever; reject non-finite stamps outright.
+        if not math.isfinite(fetched_at):
+            return None
         if time.time() - fetched_at > self.ttl_seconds:
             return None
         return entry.get("data")

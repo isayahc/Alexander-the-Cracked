@@ -69,6 +69,23 @@ def test_discover_events_fetches_and_caches_on_cache_miss(
     assert discover_events(cache_dir=tmp_path) == events
 
 
+def test_discover_events_survives_corrupt_cache_file(
+    feed_payloads: dict[str, object],
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    def fake_http_get_json(url: str) -> object:
+        return feed_payloads[url]
+
+    monkeypatch.setattr(discover, "http_get_json", fake_http_get_json)
+
+    # Unparseable junk on disk where a cache entry belongs.
+    (tmp_path / "corrupt.json").write_text("[]")
+    events = discover_events(cache_dir=tmp_path)
+
+    assert {event.source for event in events} == {"devpost", "hackclub"}
+
+
 def test_discover_events_survives_one_feed_down(
     feed_payloads: dict[str, object],
     monkeypatch: pytest.MonkeyPatch,
