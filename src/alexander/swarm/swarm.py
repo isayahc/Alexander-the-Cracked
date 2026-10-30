@@ -68,7 +68,8 @@ async def run_swarm(
     and repeats until the pool is drained. Returns the outcomes sorted by
     rank. A build that raises is recorded as an ``ERROR`` result so sibling
     builds still land in the registry; the first such exception is re-raised
-    after all workers join.
+    after all workers join. Cancellation (or any ``BaseException``) releases
+    the claim — the event stays buildable — and propagates to the caller.
     """
     if instances < 1:
         raise ValueError("instances must be at least 1")
@@ -92,6 +93,12 @@ async def run_swarm(
                 result = BuildResult(
                     status=BuildStatus.ERROR, artifact_path=plan.out_dir, error=str(exc)
                 )
+            except BaseException:
+                # CancelledError / KeyboardInterrupt: no terminal result was
+                # recorded, so release the claim instead of stranding the event
+                # as a forever-pending row; the cancellation still propagates.
+                registry.release(slug)
+                raise
             registry.record_result(
                 slug,
                 result.status,
