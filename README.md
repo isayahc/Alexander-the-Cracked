@@ -271,6 +271,70 @@ alexander swarm --instances 2 --max-attempts 1 --minutes 10
 and graduate to bigger budgets once the output quality is where you want it.
 `--dry-run` costs nothing — use it before any real spend.
 
+## Obvious MCP bridge
+
+The repo ships a small remote MCP server (`obvious_mcp_bridge`) that exposes a
+minimal Obvious tool surface to any MCP client — Alexander instances, Claude
+Desktop, anything MCP-speaking. It lets external agents ship work **into** the
+Obvious workspace: list, create, and update tasks, and publish markdown
+documents. There are no destructive verbs; the bridge cannot delete or restore
+anything.
+
+### What it exposes
+
+Streamable HTTP at a single `/mcp` endpoint (stateless, JSON responses) plus an
+unauthenticated `GET /healthz` that returns `{"ok": true}`. Exactly four tools,
+each shelling out to the `obvious` CLI (60s timeout, parsed JSON output):
+
+| Tool | Purpose |
+|------|---------|
+| `list_tasks(status)` | Read-only view of work in flight |
+| `create_task(title, description, assignee)` | Create a task in the project |
+| `update_task(task_id, status, completion_note)` | Move a task / record its outcome |
+| `create_document(name, markdown, description)` | Publish a document artifact |
+
+### Run
+
+```bash
+pip install -e .
+export MCP_BRIDGE_TOKEN="$(python3 -c 'import secrets; print(secrets.token_urlsafe(32))')"
+export BRIDGE_PORT=8899            # optional, default 8899
+export OBVIOUS_BRIDGE_CWD=/home/user/project   # optional, where the obvious CLI resolves the workspace
+obvious-mcp-bridge                 # serves 0.0.0.0:$BRIDGE_PORT
+```
+
+`MCP_BRIDGE_TOKEN` is required — the server refuses to start without it. It is
+the only thing between a stranger and task/document creation, so use a strong
+random value.
+
+### Environment variables
+
+| Variable | Required | Meaning |
+|----------|----------|---------|
+| `MCP_BRIDGE_TOKEN` | yes | Bearer token callers must present in `Authorization: Bearer <token>`; compared in constant time, never logged |
+| `BRIDGE_PORT` | no | Listen port (default 8899) |
+| `OBVIOUS_BRIDGE_CWD` | no | Working directory for the `obvious` CLI subprocess (default `/home/user/project`) |
+
+### Token rotation
+
+Update the token in two places, then restart the service:
+
+1. Obvious: Settings → Secrets → update `MCP_BRIDGE_TOKEN` (or run
+   `obvious secrets upsert --name=MCP_BRIDGE_TOKEN`).
+2. Restart the bridge process so it picks up the new value — in-flight callers
+   using the old token get 401 until they update their connector config.
+
+### Connect from an MCP client
+
+In Obvious: Settings → Integrations → Connectors → MCP (HTTP):
+
+1. Paste the bridge's hosted URL (the `/mcp` path is the connector endpoint).
+2. Choose **Bearer token** auth and enter `MCP_BRIDGE_TOKEN`.
+3. Click **Test connection** — it initializes MCP and lists the four tools.
+
+The bridge tests never run the real `obvious` CLI and touch no network: the
+CLI subprocess wrapper is faked in tests.
+
 ## Development
 
 ```bash
