@@ -45,3 +45,31 @@ def test_save_is_best_effort(tmp_path: Path) -> None:
     cache = ResponseCache(cache_dir=read_only / "sub")
     cache.save("key", {"a": 1})
     assert cache.load("key") is None
+
+
+def test_concurrent_save_atomic(tmp_path: Path) -> None:
+    # Two threads racing on the same key must leave one parseable entry
+    # whose data matches one of the writers' payloads.
+    import threading
+
+    cache = ResponseCache(cache_dir=tmp_path)
+    payloads = [{"writer": "a", "i": i} for i in range(200)]
+    payloads += [{"writer": "b", "i": i} for i in range(200)]
+
+    def save_all(writer: str) -> None:
+        for i in range(200):
+            cache.save("key", {"writer": writer, "i": i})
+
+    threads = [
+        threading.Thread(target=save_all, args=("a",)),
+        threading.Thread(target=save_all, args=("b",)),
+    ]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+
+    data = cache.load("key")
+    assert data in payloads
+    # No temp files left behind.
+    assert not list(tmp_path.glob("*.tmp"))
