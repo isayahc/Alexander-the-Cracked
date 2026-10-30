@@ -16,7 +16,7 @@ from pathlib import Path
 
 from alexander.builder import BuildStatus
 
-_CLAIMED = "claimed"
+CLAIMED = "claimed"
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS claims (
@@ -78,7 +78,7 @@ class ClaimRegistry:
             "INSERT OR IGNORE INTO claims"
             " (event_slug, event_name, rank, owner, claimed_at, status)"
             " VALUES (?, ?, ?, ?, ?, ?)",
-            (event_slug, event_name, rank, self.owner, self._clock(), _CLAIMED),
+            (event_slug, event_name, rank, self.owner, self._clock(), CLAIMED),
         )
         self._conn.commit()
         return cursor.rowcount == 1
@@ -118,7 +118,7 @@ class ClaimRegistry:
         """
         self._conn.execute(
             "DELETE FROM claims WHERE event_slug = ? AND status = ?",
-            (event_slug, _CLAIMED),
+            (event_slug, CLAIMED),
         )
         self._conn.commit()
 
@@ -136,7 +136,7 @@ class ClaimRegistry:
         return [
             row[0]
             for row in self._conn.execute(
-                "SELECT event_slug FROM claims WHERE status = ?", (_CLAIMED,)
+                "SELECT event_slug FROM claims WHERE status = ?", (CLAIMED,)
             )
         ]
 

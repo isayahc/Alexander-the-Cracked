@@ -6,7 +6,14 @@ build outcome is recorded back on the claim row. The runner (`run_swarm`)
 drives N asyncio workers that claim an event before building it.
 """
 
-from alexander.swarm.registry import ClaimRegistry, ClaimRow
+from alexander.swarm.registry import CLAIMED, ClaimRegistry, ClaimRow
+from alexander.swarm.report import (
+    has_failed_build,
+    pending_slugs,
+    render_leaderboard,
+    report_payload,
+    write_report,
+)
 from alexander.swarm.swarm import (
     DEFAULT_REGISTRY_PATH,
     EventPool,
@@ -15,10 +22,16 @@ from alexander.swarm.swarm import (
 )
 
 __all__ = [
+    "CLAIMED",
     "DEFAULT_REGISTRY_PATH",
     "ClaimRegistry",
     "ClaimRow",
     "EventPool",
     "SwarmOutcome",
+    "has_failed_build",
+    "pending_slugs",
+    "render_leaderboard",
+    "report_payload",
     "run_swarm",
+    "write_report",
 ]
