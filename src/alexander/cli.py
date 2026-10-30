@@ -1,10 +1,20 @@
 """Alexander CLI: a command group wiring the discovery, ranking, and builder stages."""
 
+import asyncio
 import json
+from datetime import timedelta
 from pathlib import Path
 
 import click
+from pydantic import ValidationError
 
+from alexander.builder import (
+    BuildBudgets,
+    BuildStatus,
+    HackathonBrief,
+    MissingApiKeyError,
+    create_builder,
+)
 from alexander.discovery import discover_events
 from alexander.ranking import (
     RankedEvent,
@@ -84,3 +94,34 @@ def _ranked_to_json(ranked: list[RankedEvent]) -> list[dict[str, object]]:
         }
         for position, entry in enumerate(ranked, start=1)
     ]
+
+
+@cli.command()
+@click.option("--brief", "brief_file", required=True, type=click.Path(exists=True, path_type=Path))
+@click.option("--out", "out_dir", required=True, type=click.Path(path_type=Path))
+@click.option("--max-attempts", default=5, show_default=True, type=click.IntRange(min=1))
+@click.option("--minutes", default=30.0, show_default=True, type=click.FloatRange(min=0))
+def build(brief_file: Path, out_dir: Path, max_attempts: int, minutes: float) -> None:
+    """Build a project from a JSON hackathon brief."""
+    try:
+        brief = HackathonBrief.model_validate_json(brief_file.read_text(encoding="utf-8"))
+    except ValidationError as exc:
+        click.echo(f"Brief file {brief_file} is not a valid brief: {exc}", err=True)
+        raise SystemExit(1) from exc
+    try:
+        budgets = BuildBudgets(max_attempts=max_attempts, wall_clock=timedelta(minutes=minutes))
+        result = asyncio.run(create_builder().build(brief, out_dir, budgets))
+    except MissingApiKeyError as exc:
+        click.echo(str(exc), err=True)
+        raise SystemExit(1) from exc
+    except ValueError as exc:
+        click.echo(f"Invalid build budgets: {exc}", err=True)
+        raise SystemExit(1) from exc
+
+    click.echo(f"build {result.status.value}: {result.artifact_path}")
+    if result.test_summary:
+        click.echo(f"tests: {result.test_summary}")
+    if result.error:
+        click.echo(f"error: {result.error}", err=True)
+    if result.status is not BuildStatus.SUCCESS:
+        raise SystemExit(1)

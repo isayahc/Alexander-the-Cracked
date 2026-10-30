@@ -1,0 +1,7 @@
+{
+  "event_name": "Sample City Hack 2026",
+  "description": "A tiny sprint-timer CLI that counts down hackathon sprint minutes and cheers when a sprint ends.",
+  "themes": ["developer tools", "productivity"],
+  "deadline": "2026-11-15",
+  "prize": "$500 plus API credits"
+}
